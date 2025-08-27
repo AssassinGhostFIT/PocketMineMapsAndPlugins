@@ -12,15 +12,19 @@
   </header>
 
   <main>
-    <section id="home">
-      <button onclick="navigate('servers')">Servers</button>
-      <button onclick="navigate('sells')">Sells</button>
-      <button onclick="navigate('chat')">Chat</button>
-      <button onclick="navigate('perfil')">Perfil</button>
+    <section id="content">
+      <h2>Bienvenido</h2>
+      <p>Selecciona una opción en la barra inferior.</p>
     </section>
-
-    <section id="content"></section>
   </main>
+
+  <!-- Barra inferior fija -->
+  <nav class="bottom-nav">
+    <button onclick="navigate('servers')">Servers</button>
+    <button onclick="navigate('sells')">Sells</button>
+    <button onclick="navigate('chat')">Chat</button>
+    <button onclick="navigate('perfil')">Perfil</button>
+  </nav>
 
   <script src="js/script.js"></script>
 </body>
