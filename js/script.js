@@ -80,9 +80,16 @@ function drawShootingStars() {
   });
 }
 
-/* Loop de animación */
+/* Loop de animación con degradado galaxia */
 function animate() {
-  ctx.fillStyle = "black";
+  // Degradado estilo sci-fi / galaxia
+  let gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  gradient.addColorStop(0, "#0f2027");   // azul oscuro
+  gradient.addColorStop(0.3, "#203a43"); // azul gris
+  gradient.addColorStop(0.6, "#2c5364"); // azul verdoso
+  gradient.addColorStop(1, "#4a148c");   // morado fuerte
+
+  ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   updateStars();
