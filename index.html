@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- Lienzo para el fondo cósmico -->
+  <canvas id="starfield"></canvas>
+
   <header>
     <h1>PocketMine Maps & Plugins</h1>
   </header>
@@ -20,6 +23,7 @@
 
   <!-- Barra inferior fija -->
   <nav class="bottom-nav">
+    <button onclick="navigate('inicio')">Inicio</button>
     <button onclick="navigate('servers')">Servers</button>
     <button onclick="navigate('sells')">Sells</button>
     <button onclick="navigate('chat')">Chat</button>
