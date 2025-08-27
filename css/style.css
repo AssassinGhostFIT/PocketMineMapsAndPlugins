@@ -1,13 +1,28 @@
-body {
-  font-family: Arial, sans-serif;
+/* Reset básico */
+body, html {
   margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
   text-align: center;
-  background: #f4f4f4;
+  color: white;
 }
 
+/* Fondo cósmico en canvas */
+#starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: -1;
+}
+
+/* Contenido */
 header {
-  background: #222;
-  color: white;
+  background: rgba(34, 34, 34, 0.8);
   padding: 15px;
 }
 
@@ -16,21 +31,17 @@ main {
   margin-bottom: 70px; /* espacio para la barra */
 }
 
-button {
-  cursor: pointer;
-}
-
 /* Barra inferior fija */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: #222;
+  background: rgba(34, 34, 34, 0.8);
   display: flex;
   justify-content: space-around;
   padding: 10px 0;
-  box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.4);
 }
 
 .bottom-nav button {
