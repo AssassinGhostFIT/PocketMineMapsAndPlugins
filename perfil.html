@@ -8,68 +8,48 @@
 </head>
 <body>
   <header class="cover">
-    <img src="img/portada.jpg" alt="Portada" class="cover-img">
+    <img src="assets/img/portada.jpg" alt="Portada" class="cover-img">
 
     <!-- Foto de perfil -->
     <div class="profile-pic">
-      <img src="img/perfil.jpg" alt="Foto de perfil">
+      <img src="assets/img/perfil.jpg" alt="Foto de perfil">
     </div>
   </header>
 
-  <!-- Info de Usuario -->
+  <!-- Información principal -->
   <section class="profile-info">
-    <div class="top-info">
-      <h2 class="name">Nombre de Usuario</h2>
-      <button class="follow-btn">+ Seguir</button>
-    </div>
-
-    <p class="status online">En línea</p>
-
-    <div class="sub-info">
-      <span>🌍 Panamá</span>
-      <span>⚧ Masculino</span>
-      <span>⭐ Lv.6</span>
+    <h2 class="name">Nombre de Usuario <button class="follow-btn">+ Seguir</button></h2>
+    
+    <div class="status">
+      <span class="status-badge online">🟣 En línea</span>
     </div>
 
     <div class="stats">
-      <p><strong>205</strong><br>Siguiendo</p>
-      <p><strong>8210</strong><br>Seguidores</p>
+      <p><b>Seguidores:</b> 8210</p>
+      <p><b>Siguiendo:</b> 205</p>
+      <p><b>Nivel:</b> Lv.6</p>
+      <p><b>País:</b> 🇵🇦 Panamá</p>
+      <p><b>Género:</b> Femenino</p>
     </div>
   </section>
 
-  <!-- Espacio de CP -->
-  <section class="card purple">
-    <h3>Espacio de CP</h3>
-    <p>No vinculado con CP</p>
-    <div class="product-box">Aquí irán tus productos ⭐</div>
+  <!-- Secciones -->
+  <section class="sections">
+    <div class="section-card" data-section="productos">🛍️ Mis Productos</div>
+    <div class="section-card" data-section="insignia">🏅 Insignia</div>
+    <div class="section-card" data-section="fama">👑 Salón de la Fama</div>
+    <div class="section-card" data-section="mochila">🎒 Mochila</div>
   </section>
 
-  <!-- Insignia -->
-  <section class="card gold">
-    <h3>Insignia</h3>
-    <div class="badge">🏅</div>
-  </section>
-
-  <!-- Salón de la Fama -->
-  <section class="card red">
-    <h3>Salón de la Fama</h3>
-    <p>🔥 Top vendedores del mes</p>
-    <ul class="ranking">
-      <li>🥇 Vendedor 1</li>
-      <li>🥈 Vendedor 2</li>
-      <li>🥉 Vendedor 3</li>
-    </ul>
-  </section>
-
-  <!-- Mochila (bordes comprados) -->
-  <section class="card pink">
-    <h3>🎁 Mochila</h3>
-    <div class="mochila">
-      <div class="item">Borde 1</div>
-      <div class="item">Borde 2</div>
-      <div class="item">Borde 3</div>
+  <!-- Modal (para abrir contenido dinámico) -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div id="modal-body">
+        <!-- Aquí JS insertará el contenido -->
+      </div>
     </div>
-  </section>
+  </div>
 
   <script src="assets/js/perfil.js"></script>
 </body>
