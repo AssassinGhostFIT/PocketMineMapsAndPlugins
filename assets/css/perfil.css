@@ -1,8 +1,36 @@
+/* Fondo con estrellas */
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
-  background: linear-gradient(to bottom, #0a0a0a, #1e1e1e, #2c2c2c);
+  background: radial-gradient(circle at center, #0a0a0a, #000 80%);
   color: #fff;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("https://www.transparenttextures.com/patterns/stardust.png");
+  animation: stars 10s linear infinite;
+  opacity: 0.6;
+  z-index: -1;
+}
+
+@keyframes stars {
+  from { transform: translateY(0); }
+  to { transform: translateY(-200px); }
+}
+
+/* Nebulosa ligera */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(160,32,240,0.3), transparent 60%),
+              radial-gradient(circle at 70% 80%, rgba(0,191,255,0.2), transparent 60%);
+  filter: blur(60px);
+  z-index: -1;
 }
 
 /* Portada */
@@ -19,13 +47,28 @@ body {
   filter: brightness(0.8);
 }
 
-/* Foto perfil */
+/* Engranaje */
+.settings-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  font-size: 20px;
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.settings-btn:hover { background: rgba(255,255,255,0.2); }
+
+/* Foto perfil (más afuera) */
 .profile-pic {
   position: absolute;
-  bottom: -45px;
+  bottom: -60px;
   left: 20px;
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   overflow: hidden;
   border: 4px solid #a020f0;
@@ -37,13 +80,7 @@ body {
   object-fit: cover;
 }
 
-/* Animación de borde */
-@keyframes pulseBorder {
-  0% { border-color: #a020f0; }
-  50% { border-color: #ff00ff; }
-  100% { border-color: #a020f0; }
-}
-
+/* Info perfil */
 .profile-info {
   margin-top: 70px;
   padding: 20px;
@@ -51,70 +88,38 @@ body {
 .name {
   font-size: 22px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 12px;
 }
+
+/* Botón seguir más pegado al borde */
 .follow-btn {
   background: #a020f0;
   border: none;
   color: white;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
   cursor: pointer;
   transition: 0.3s;
+  margin-right: 5px;
 }
 .follow-btn:hover { background: #ff00ff; }
 
-.status-badge {
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 14px;
-}
-.online { background: rgba(160,32,240,0.3); }
-
-/* Secciones */
-.sections {
-  padding: 20px;
+/* Estadísticas */
+.stats {
+  margin-top: 15px;
   display: grid;
-  gap: 12px;
-}
-.section-card {
-  background: rgba(255,255,255,0.05);
-  border-radius: 12px;
-  padding: 14px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.section-card:hover {
-  background: rgba(255,255,255,0.15);
-  transform: scale(1.02);
+  gap: 8px;
 }
 
-/* Modal */
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+.stats-row {
+  display: flex;
+  justify-content: space-between;
 }
-.modal-content {
-  background: #1e1e1e;
-  padding: 20px;
-  border-radius: 16px;
-  width: 90%;
-  max-width: 400px;
-  color: #fff;
-  animation: slideUp 0.4s ease;
+.stats-inline {
+  display: flex;
+  justify-content: space-between;
 }
-.close-btn {
-  float: right;
-  font-size: 24px;
-  cursor: pointer;
-}
-@keyframes slideUp {
-  from { transform: translateY(100px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+.stats-inline p {
+  margin: 0 10px 0 0;
 }
