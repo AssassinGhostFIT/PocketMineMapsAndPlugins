@@ -103,23 +103,23 @@ body::after {
 }
 
 /* === INFO PERFIL === */
-.profile-info {
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-top: 70px;
   padding: 20px;
   position: relative;
 }
 
-/* Nombre + Botón Seguir */
-.name-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 .name {
   font-size: 22px;
   font-weight: bold;
-  margin-left: 130px; /* para que no pise la foto */
+  margin-left: 130px; /* deja espacio para la foto */
+  flex-grow: 1;
+  text-align: center;
 }
+
 .follow-btn {
   background: #a020f0;
   border: none;
@@ -128,11 +128,12 @@ body::after {
   border-radius: 20px;
   cursor: pointer;
   transition: 0.3s;
-  margin-right: 10px; /* pegado a la derecha */
+  margin-left: auto; /* asegura que quede a la derecha */
+  margin-right: 10px;
 }
 .follow-btn:hover { background: #ff00ff; }
 
-/* Estado (debajo del nombre) */
+/* Estado debajo de la foto */
 .status {
   margin-left: 130px;
   margin-top: 5px;
@@ -147,18 +148,17 @@ body::after {
 
 /* === ESTADÍSTICAS === */
 .stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px 20px;
-  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 20px;
   font-size: 14px;
 }
 
 /* Nivel / País / Género en una sola fila */
 .extra-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 20px;
   font-size: 14px;
   text-align: center;
 }
