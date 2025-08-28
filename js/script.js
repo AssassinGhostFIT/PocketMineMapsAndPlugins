@@ -227,7 +227,6 @@ function drawShooting() {
 }
 
 function loop() {
-  // Fondo tipo galaxia (por si quieres combinar con canvas pintado; ahora usamos #nebula en CSS)
   ctx.clearRect(0,0,canvas.width,canvas.height);
   drawStars();
   drawShooting();
@@ -235,3 +234,28 @@ function loop() {
   requestAnimationFrame(loop);
 }
 loop();
+
+/*******************************
+ * NAVEGACIÓN ENTRE PESTAÑAS   *
+ *******************************/
+function navigate(tab) {
+  switch(tab) {
+    case 'inicio':
+      window.location.href = 'index.html';
+      break;
+    case 'servers':
+      window.location.href = 'servers.html';
+      break;
+    case 'sells':
+      window.location.href = 'sells.html';
+      break;
+    case 'chat':
+      window.location.href = 'chat.html';
+      break;
+    case 'perfil':
+      window.location.href = 'perfil.html';
+      break;
+    default:
+      console.warn('Se intentó navegar a una pestaña desconocida:', tab);
+  }
+}
