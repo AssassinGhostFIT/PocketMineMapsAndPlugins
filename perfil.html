@@ -10,9 +10,6 @@
   <header class="cover">
     <img src="assets/img/portada.jpg" alt="Portada" class="cover-img">
 
-    <!-- Botón de Configuración (añadido) -->
-    <button class="settings-btn" aria-label="Configuración">⚙️</button>
-
     <!-- Foto de perfil -->
     <div class="profile-pic">
       <img src="assets/img/perfil.jpg" alt="Foto de perfil">
@@ -21,22 +18,26 @@
 
   <!-- Información principal -->
   <section class="profile-info">
-    <h2 class="name">Nombre de Usuario <button class="follow-btn">+ Seguir</button></h2>
+    <h2 class="name">
+      Nombre de Usuario 
+      <button class="follow-btn">+ Seguir</button>
+    </h2>
     
     <div class="status">
       <span class="status-badge online">🟣 En línea</span>
     </div>
 
-    <div class="stats">
-      <p><b>Seguidores:</b> 8210</p>
-      <p><b>Siguiendo:</b> 205</p>
-      <p><b>Nivel:</b> Lv.6</p>
-      <p><b>País:</b> 🇵🇦 Panamá</p>
-      <p><b>Género:</b> Femenino</p>
+    <!-- Stats acomodados -->
+    <div class="stats-grid">
+      <div><b>Seguidores:</b> 8210</div>
+      <div><b>Siguiendo:</b> 205</div>
+      <div><b>Nivel:</b> Lv.6</div>
+      <div><b>Género:</b> Femenino</div>
+      <div><b>País:</b> 🇵🇦 Panamá</div>
     </div>
   </section>
 
-  <!-- Secciones -->
+  <!-- Secciones en tarjetas -->
   <section class="sections">
     <div class="section-card" data-section="productos">🛍️ Mis Productos</div>
     <div class="section-card" data-section="insignia">🏅 Insignia</div>
@@ -44,13 +45,11 @@
     <div class="section-card" data-section="mochila">🎒 Mochila</div>
   </section>
 
-  <!-- Modal (para abrir contenido dinámico) -->
+  <!-- Modal -->
   <div class="modal" id="modal">
     <div class="modal-content">
       <span class="close-btn">&times;</span>
-      <div id="modal-body">
-        <!-- Aquí JS insertará el contenido -->
-      </div>
+      <div id="modal-body"></div>
     </div>
   </div>
 
