@@ -129,9 +129,9 @@ body::after {
 }
 .follow-btn:hover { background: #ff00ff; }
 
-/* Estado */
+/* === ESTADO (debajo de la foto, no del nombre) === */
 .status {
-  margin-left: 130px; /* debajo del nombre */
+  margin-left: 20px;   /* alineado a la foto */
   margin-top: 5px;
   font-size: 14px;
 }
