@@ -33,6 +33,17 @@ body::after {
   z-index: -1;
 }
 
+/* === CONTENEDOR DEL PERFIL === */
+.profile-container {
+  max-width: 450px;
+  margin: 40px auto;
+  background: rgba(30, 30, 30, 0.75); /* gris semi-transparente */
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  overflow: hidden;
+  backdrop-filter: blur(6px); /* efecto vidrio */
+}
+
 /* Portada */
 .cover {
   position: relative;
@@ -105,21 +116,33 @@ body::after {
 }
 .follow-btn:hover { background: #ff00ff; }
 
-/* Estadísticas */
-.stats {
-  margin-top: 15px;
+/* Estadísticas en grid */
+.stats-grid {
   display: grid;
-  gap: 8px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 20px;
+  margin-top: 10px;
+  font-size: 14px;
 }
 
-.stats-row {
-  display: flex;
-  justify-content: space-between;
+/* Secciones en tarjetas */
+.sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px;
 }
-.stats-inline {
-  display: flex;
-  justify-content: space-between;
+
+.section-card {
+  background: rgba(255,255,255,0.08);
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
-.stats-inline p {
-  margin: 0 10px 0 0;
+
+.section-card:hover {
+  background: rgba(255,255,255,0.18);
+  transform: scale(1.05);
 }
