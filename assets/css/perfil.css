@@ -108,6 +108,8 @@ body::after {
   padding: 20px;
   position: relative;
 }
+
+/* Nombre + Botón Seguir */
 .name-row {
   display: flex;
   align-items: center;
@@ -126,12 +128,13 @@ body::after {
   border-radius: 20px;
   cursor: pointer;
   transition: 0.3s;
+  margin-right: 10px; /* pegado a la derecha */
 }
 .follow-btn:hover { background: #ff00ff; }
 
-/* === ESTADO (debajo de la foto, no del nombre) === */
+/* Estado (debajo del nombre) */
 .status {
-  margin-left: 20px;   /* alineado a la foto */
+  margin-left: 130px;
   margin-top: 5px;
   font-size: 14px;
 }
@@ -151,7 +154,7 @@ body::after {
   font-size: 14px;
 }
 
-/* Nivel / País / Género */
+/* Nivel / País / Género en una sola fila */
 .extra-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
