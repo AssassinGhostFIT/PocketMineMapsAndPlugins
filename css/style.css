@@ -144,15 +144,11 @@ main { max-width: 1100px; margin: 20px auto 100px; padding: 0 16px; }
 .chip:hover { border-color: #00ffff; box-shadow: 0 0 12px rgba(0,255,255,0.25); }
 .chip.active { background: rgba(0,255,255,0.15); border-color: #00ffff; }
 
-/* Grid productos (2 por fila desktop / 1 en móvil) */
+/* Grid productos → 2 por fila fijo */
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 14px;
-}
-@media (max-width: 700px) {
-  .brand { grid-template-columns: 1fr; }
-  .grid { grid-template-columns: 1fr; }
 }
 
 /* Card producto */
