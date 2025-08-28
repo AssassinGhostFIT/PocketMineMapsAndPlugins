@@ -1,49 +1,50 @@
-/* Fondo con estrellas */
+/* === FONDO === */
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
-  background: radial-gradient(circle at center, #0a0a0a, #000 80%);
+  background: linear-gradient(180deg, #000 0%, #111 40%, #222 100%);
   color: #fff;
   overflow-x: hidden;
 }
 
+/* Estrellas */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   background: url("https://www.transparenttextures.com/patterns/stardust.png");
-  animation: stars 10s linear infinite;
-  opacity: 0.6;
+  animation: stars 12s linear infinite;
+  opacity: 0.5;
   z-index: -1;
 }
 
 @keyframes stars {
   from { transform: translateY(0); }
-  to { transform: translateY(-200px); }
+  to { transform: translateY(-300px); }
 }
 
-/* Nebulosa ligera */
+/* Nebulosas */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 30% 20%, rgba(160,32,240,0.3), transparent 60%),
-              radial-gradient(circle at 70% 80%, rgba(0,191,255,0.2), transparent 60%);
+  background: radial-gradient(circle at 30% 20%, rgba(160,32,240,0.25), transparent 60%),
+              radial-gradient(circle at 70% 80%, rgba(0,191,255,0.15), transparent 60%);
   filter: blur(60px);
   z-index: -1;
 }
 
-/* === CONTENEDOR DEL PERFIL === */
+/* === CONTENEDOR PERFIL === */
 .profile-container {
-  max-width: 450px;
+  max-width: 460px;
   margin: 40px auto;
-  background: rgba(30, 30, 30, 0.75); /* gris semi-transparente */
+  background: rgba(30, 30, 30, 0.75);
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.6);
   overflow: hidden;
-  backdrop-filter: blur(6px); /* efecto vidrio */
+  backdrop-filter: blur(6px);
 
-  /* Animación */
+  /* Animación de entrada */
   animation: fadeZoom 0.8s ease forwards;
   transform: scale(0.9);
   opacity: 0;
@@ -56,7 +57,7 @@ body::after {
   }
 }
 
-/* Portada */
+/* === PORTADA === */
 .cover {
   position: relative;
   width: 100%;
@@ -70,7 +71,7 @@ body::after {
   filter: brightness(0.8);
 }
 
-/* Engranaje */
+/* Botón de configuración */
 .settings-btn {
   position: absolute;
   top: 12px;
@@ -82,10 +83,11 @@ body::after {
   padding: 6px;
   border-radius: 50%;
   cursor: pointer;
+  transition: 0.3s;
 }
 .settings-btn:hover { background: rgba(255,255,255,0.2); }
 
-/* Foto perfil (más afuera) */
+/* === FOTO DE PERFIL === */
 .profile-pic {
   position: absolute;
   bottom: -60px;
@@ -103,7 +105,12 @@ body::after {
   object-fit: cover;
 }
 
-/* Info perfil */
+@keyframes pulseBorder {
+  0%, 100% { box-shadow: 0 0 12px #a020f0; }
+  50% { box-shadow: 0 0 24px #ff00ff; }
+}
+
+/* === INFORMACIÓN PERFIL === */
 .profile-info {
   margin-top: 70px;
   padding: 20px;
@@ -115,7 +122,7 @@ body::after {
   align-items: center;
 }
 
-/* Botón seguir más pegado al borde */
+/* Botón Seguir */
 .follow-btn {
   background: #a020f0;
   border: none;
@@ -128,7 +135,19 @@ body::after {
 }
 .follow-btn:hover { background: #ff00ff; }
 
-/* Estadísticas en grid */
+/* Estado */
+.status {
+  margin-top: 5px;
+  font-size: 14px;
+}
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+.online { background: rgba(160,32,240,0.2); color: #ffccff; }
+
+/* === ESTADÍSTICAS === */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -137,14 +156,13 @@ body::after {
   font-size: 14px;
 }
 
-/* Secciones en tarjetas */
+/* === SECCIONES === */
 .sections {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin: 20px;
 }
-
 .section-card {
   background: rgba(255,255,255,0.08);
   padding: 12px;
@@ -153,8 +171,34 @@ body::after {
   cursor: pointer;
   transition: transform 0.2s ease, background 0.2s ease;
 }
-
 .section-card:hover {
   background: rgba(255,255,255,0.18);
   transform: scale(1.05);
+}
+
+/* === MODAL GENERAL === */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+}
+.modal-content {
+  background: #1c1c1c;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  color: #fff;
+  position: relative;
+}
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 22px;
+  cursor: pointer;
 }
