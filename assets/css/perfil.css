@@ -17,7 +17,6 @@ body::before {
   opacity: 0.5;
   z-index: -1;
 }
-
 @keyframes stars {
   from { transform: translateY(0); }
   to { transform: translateY(-300px); }
@@ -43,20 +42,12 @@ body::after {
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.6);
   backdrop-filter: blur(6px);
-  /* OJO: removido overflow hidden como pediste */
-  /* overflow: hidden; */
-
-  /* Animación de entrada */
   animation: fadeZoom 0.8s ease forwards;
   transform: scale(0.9);
   opacity: 0;
 }
-
 @keyframes fadeZoom {
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  to { transform: scale(1); opacity: 1; }
 }
 
 /* === PORTADA === */
@@ -89,15 +80,15 @@ body::after {
 }
 .settings-btn:hover { background: rgba(255,255,255,0.2); }
 
-/* === FOTO DE PERFIL (izquierda y completa) === */
+/* === FOTO DE PERFIL === */
 .profile-pic {
   position: absolute;
-  top: 160px; /* Ajustado para que no se corte */
-  left: 20px;    /* Mantener a la izquierda */
+  top: 160px;
+  left: 20px;
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  overflow: hidden;              /* Mantener el recorte circular */
+  overflow: hidden;
   border: 4px solid #a020f0;
   animation: pulseBorder 3s infinite;
 }
@@ -106,25 +97,27 @@ body::after {
   height: 100%;
   object-fit: cover;
 }
-
 @keyframes pulseBorder {
   0%, 100% { box-shadow: 0 0 12px #a020f0; }
   50%      { box-shadow: 0 0 24px #ff00ff; }
 }
 
-/* === INFORMACIÓN PERFIL === */
+/* === INFO PERFIL === */
 .profile-info {
   margin-top: 70px;
   padding: 20px;
+  position: relative;
+}
+.name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .name {
   font-size: 22px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  font-weight: bold;
+  margin-left: 130px; /* para que no pise la foto */
 }
-
-/* Botón Seguir */
 .follow-btn {
   background: #a020f0;
   border: none;
@@ -133,12 +126,12 @@ body::after {
   border-radius: 20px;
   cursor: pointer;
   transition: 0.3s;
-  margin-right: 5px;
 }
 .follow-btn:hover { background: #ff00ff; }
 
 /* Estado */
 .status {
+  margin-left: 130px; /* debajo del nombre */
   margin-top: 5px;
   font-size: 14px;
 }
@@ -158,10 +151,19 @@ body::after {
   font-size: 14px;
 }
 
+/* Nivel / País / Género */
+.extra-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
 /* === SECCIONES === */
 .sections {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 12px;
   margin: 20px;
 }
@@ -178,7 +180,7 @@ body::after {
   transform: scale(1.05);
 }
 
-/* === MODAL GENERAL === */
+/* === MODAL === */
 .modal {
   position: fixed;
   inset: 0;
