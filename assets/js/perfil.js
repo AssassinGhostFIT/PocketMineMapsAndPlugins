@@ -1,26 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const settingsBtn = document.querySelector(".settings-btn");
+  const followBtn = document.querySelector(".follow-btn");
+  const status = document.querySelector(".status");
 
-  // Click en el botón de configuraciones
-  settingsBtn.addEventListener("click", () => {
-    alert("⚙️ Aquí irán las configuraciones, política de privacidad, etc.");
+  followBtn.addEventListener("click", () => {
+    if (followBtn.textContent.includes("Seguir")) {
+      followBtn.textContent = "Siguiendo ✓";
+      followBtn.style.background = "#00cc88";
+    } else {
+      followBtn.textContent = "+ Seguir";
+      followBtn.style.background = "#ff00ff";
+    }
   });
 
-  // Animación de entrada para la info
-  const profileInfo = document.querySelector(".profile-info");
-  setTimeout(() => {
-    profileInfo.style.opacity = "1";
-  }, 500);
-
-  // Simulación de estado online/offline
-  const dot = document.querySelector(".dot");
+  // Simulación: cambiar estado aleatoriamente
   setInterval(() => {
-    if (dot.classList.contains("online")) {
-      dot.classList.remove("online");
-      dot.classList.add("offline");
+    if (Math.random() > 0.5) {
+      status.textContent = "En línea";
+      status.classList.add("online");
+      status.classList.remove("offline");
     } else {
-      dot.classList.remove("offline");
-      dot.classList.add("online");
+      status.textContent = "Desconectado";
+      status.classList.add("offline");
+      status.classList.remove("online");
     }
-  }, 5000); // cambia cada 5s
+  }, 5000);
 });
