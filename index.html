@@ -2,74 +2,55 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>PocketMine Maps & Plugins</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>PocketMine Maps and Plugins</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Fondo -->
+  <!-- Fondo animado -->
   <canvas id="stars"></canvas>
   <div id="nebula"></div>
 
   <!-- Barra superior -->
   <header>
-    <h1>PocketMine Maps & Plugins</h1>
-    <div class="search-bar">
-      <input type="text" placeholder="Buscar...">
-    </div>
+    <h1 id="title">PocketMine Maps and Plugins</h1>
+    <input type="text" id="search" placeholder="Buscar...">
   </header>
 
-  <!-- Menú -->
-  <nav>
-    <button>Inicio</button>
-    <button>Plugins</button>
-    <button>Maps</button>
-    <button>Sells</button>
-    <button>Chat</button>
-    <button>Perfil</button>
-  </nav>
-
-  <!-- Slider Promociones -->
+  <!-- Carrusel -->
   <section class="slider">
     <div class="slides">
-      <img src="img/promo1.jpg" alt="Promo 1">
-      <img src="img/promo2.jpg" alt="Promo 2">
-      <img src="img/promo3.jpg" alt="Promo 3">
-      <img src="img/promo4.jpg" alt="Promo 4">
-      <img src="img/promo5.jpg" alt="Promo 5">
+      <img src="img/slide1.jpg" alt="Promo 1">
+      <img src="img/slide2.jpg" alt="Promo 2">
+      <img src="img/slide3.jpg" alt="Promo 3">
+      <img src="img/slide4.jpg" alt="Promo 4">
+      <img src="img/slide5.jpg" alt="Promo 5">
     </div>
   </section>
 
   <!-- Categorías -->
-  <section class="categorias">
-    <button>Todos</button>
-    <button>Plugins</button>
-    <button>Maps</button>
-  </section>
+  <nav class="categories">
+    <button data-cat="all">Todos</button>
+    <button data-cat="plugins">Plugins</button>
+    <button data-cat="maps">Maps</button>
+  </nav>
 
   <!-- Productos -->
-  <section class="productos">
-    <div class="card">
-      <h3>SkyWars Map Pack</h3>
-      <p>Paquete profesional de mapas SkyWars</p>
-      <span class="price">$15.99</span>
-    </div>
-    <div class="card">
-      <h3>Economy Plugin Pro</h3>
-      <p>Sistema económico avanzado con shops y auctions</p>
-      <span class="price">$24.99</span>
-    </div>
-    <div class="card">
-      <h3>PvP Arena Bundle</h3>
-      <p>Paquete con 10 arenas PvP únicas</p>
-      <span class="price">$19.99</span>
-    </div>
-    <div class="card">
-      <h3>Custom Enchants Plugin</h3>
-      <p>50+ encantamientos personalizados</p>
-      <span class="price">$12.99</span>
-    </div>
-  </section>
+  <main id="products">
+    <div class="product neon">Producto 1</div>
+    <div class="product neon">Producto 2</div>
+    <div class="product neon">Producto 3</div>
+    <div class="product neon">Producto 4</div>
+  </main>
 
-  <script src="js/script.js"></script>
+  <!-- Barra inferior -->
+  <footer class="navbar">
+    <button id="btn-home">🏠 Inicio</button>
+    <button id="btn-servers">🖥 Servers</button>
+    <button id="btn-sells">💰 Sells</button>
+    <button id="btn-chat">💬 Chat</button>
+    <button id="btn-profile">👤 Perfil</button>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

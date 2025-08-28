@@ -1,4 +1,4 @@
-// Fondo estrellas animadas
+// === Fondo de estrellas ===
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
 let stars = [];
@@ -39,3 +39,30 @@ function animateStars() {
   requestAnimationFrame(animateStars);
 }
 animateStars();
+
+// === Texto con brillo dinámico ===
+const title = document.getElementById("title");
+setInterval(() => {
+  const colors = ["#ff00ff", "#00ffff", "#ffff00", "#ff6600"];
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  title.style.textShadow = `0 0 15px ${color}, 0 0 30px ${color}`;
+  title.style.color = color;
+}, 1000);
+
+// === Carrusel automático ===
+const slides = document.querySelector(".slides");
+let index = 0;
+setInterval(() => {
+  index = (index + 1) % 5;
+  slides.style.transform = `translateX(-${index * 100}%)`;
+}, 5000);
+
+// === Neon dinámico en productos ===
+const products = document.querySelectorAll(".product");
+setInterval(() => {
+  products.forEach(p => {
+    const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    p.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}, 0 0 40px ${color}`;
+    p.style.border = `2px solid ${color}`;
+  });
+}, 800);

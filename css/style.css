@@ -1,163 +1,91 @@
-* {margin:0;padding:0;box-sizing:border-box;}
-body {
-  font-family: Arial, sans-serif;
-  background: black;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+  font-family: Arial, sans-serif; 
+  background: black; 
   color: white;
   overflow-x: hidden;
 }
 
-/* Fondo */
-#stars, #nebula {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: -2;
-}
-#nebula {
-  background: radial-gradient(circle at 20% 40%, rgba(255,0,255,0.3), transparent 60%),
-              radial-gradient(circle at 80% 60%, rgba(0,255,255,0.25), transparent 70%),
-              radial-gradient(circle at 50% 80%, rgba(0,0,255,0.2), transparent 60%);
-  animation: nebulaMove 15s infinite alternate;
-  z-index: -1;
-}
-@keyframes nebulaMove {
-  0% {background-position: 20% 40%, 80% 60%, 50% 80%;}
-  100% {background-position: 30% 50%, 70% 50%, 40% 70%;}
-}
-
-/* Barra superior */
 header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 15px 25px;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(6px);
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  align-items: center;
+  padding: 15px;
 }
-header h1 {
+#title {
   font-size: 1.5em;
-  background: linear-gradient(90deg, #ff00ff, #00ffff, #ff9900, #ff00ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 4s linear infinite;
-  text-shadow: 0 0 15px rgba(255,255,255,0.6);
+  font-weight: bold;
 }
-@keyframes shine {
-  0% {background-position: 0%;}
-  100% {background-position: 200%;}
-}
-.search-bar input {
+#search {
   padding: 6px 10px;
   border-radius: 8px;
   border: none;
   outline: none;
-  width: 160px;
-}
-
-/* Menú botones */
-nav {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  padding: 15px;
-}
-nav button {
-  padding: 10px 16px;
-  border: none;
-  border-radius: 12px;
-  background: linear-gradient(90deg,#007bff,#00d4ff);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-nav button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 12px #00d4ff;
 }
 
 /* Slider */
 .slider {
   width: 100%;
   overflow: hidden;
-  position: relative;
-  height: 200px;
 }
 .slides {
   display: flex;
-  width: 500%;
-  animation: slide 25s infinite;
+  transition: transform 1s ease;
 }
 .slides img {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
-}
-@keyframes slide {
-  0% {margin-left: 0;}
-  20% {margin-left: 0;}
-  25% {margin-left: -100%;}
-  45% {margin-left: -100%;}
-  50% {margin-left: -200%;}
-  70% {margin-left: -200%;}
-  75% {margin-left: -300%;}
-  95% {margin-left: -300%;}
-  100% {margin-left: -400%;}
 }
 
 /* Categorías */
-.categorias {
+.categories {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  padding: 15px;
+  gap: 10px;
+  margin: 15px 0;
 }
-.categorias button {
-  padding: 8px 14px;
+.categories button {
+  padding: 8px 15px;
   border: none;
-  border-radius: 8px;
-  background: linear-gradient(90deg,#ff0080,#7928ca);
-  color: white;
-  font-weight: bold;
+  border-radius: 10px;
   cursor: pointer;
 }
 
-/* Grid de productos */
-.productos {
+/* Productos */
+#products {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  padding: 20px;
-}
-.card {
-  background: rgba(0,0,0,0.7);
+  gap: 15px;
   padding: 15px;
+}
+.product {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 12px;
-  color: white;
+  font-weight: bold;
   text-align: center;
+  background: rgba(255,255,255,0.05);
   position: relative;
   overflow: hidden;
 }
 
-/* Borde neon animado */
-.card::before {
-  content: "";
-  position: absolute;
-  top: -2px; left: -2px; right: -2px; bottom: -2px;
-  border-radius: 14px;
-  background: linear-gradient(270deg, #ff00ff, #00ffff, #ff9900, #ff00ff);
-  background-size: 600% 600%;
-  animation: neonMove 6s linear infinite;
-  z-index: -1;
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background: rgba(0,0,0,0.8);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
-@keyframes neonMove {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
+.navbar button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
 }
-.card h3 {margin: 10px 0;color:#00ffff;}
-.card p {font-size: 0.9em;opacity:0.8;}
-.card .price {color:#ff9900;font-weight:bold;font-size:1.2em;}
