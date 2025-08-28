@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function showModal(content) {
     modalBody.innerHTML = content;
     modal.style.display = "flex";
+    modal.style.alignItems = "center"; // 👈 centrado vertical
+    modal.style.justifyContent = "center"; // 👈 centrado horizontal
     modal.style.opacity = 0;
     modal.style.transform = "scale(0.8)";
     
@@ -112,11 +114,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === modal) hideModal();
   });
 
-  // Botón de configuración (ejemplo simple)
+  // Botón de configuración (ejemplo simple con engranaje ⚙️)
   const settingsBtn = document.querySelector(".settings-btn");
   if (settingsBtn) {
     settingsBtn.addEventListener("click", () => {
-      showModal("<h2>⚙️ Configuración</h2><p>Aquí podrás editar tu perfil próximamente.</p>");
+      showModal(`
+        <h2>⚙️ Configuración</h2>
+        <p>Aquí podrás editar tu perfil próximamente.</p>
+      `);
     });
   }
 });
