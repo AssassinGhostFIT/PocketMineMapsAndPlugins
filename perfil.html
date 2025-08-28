@@ -12,39 +12,39 @@
     
     <!-- Portada -->
     <header class="cover">
-      <img src="assets/Img/portada.jpg" alt="Portada" class="cover-img">
-
+      <img src="assets/img/portada.jpg" alt="Portada" class="cover-img">
       <!-- Botón de configuración -->
       <button class="settings-btn">⚙</button>
     </header>
 
-    <!-- Foto de perfil (ya no dentro de .cover) -->
-    <div class="profile-pic">
-      <img src="assets/Img/perfil.jpg" alt="Foto de perfil">
+    <!-- Fila principal: Foto - Nombre - Seguir -->
+    <div class="profile-header">
+      <div class="profile-pic">
+        <img src="assets/img/perfil.jpg" alt="Foto de perfil">
+      </div>
+      <h2 class="name">Nombre de Usuario</h2>
+      <button class="follow-btn">+ Seguir</button>
     </div>
 
-    <!-- Información principal -->
-    <section class="profile-info">
-      <h2 class="name">
-        Nombre de Usuario 
-        <button class="follow-btn">+ Seguir</button>
-      </h2>
-      
-      <div class="status">
-        <span class="status-badge online">🟣 En línea</span>
-      </div>
+    <!-- Estado debajo de la foto -->
+    <div class="status">
+      <span class="status-badge online">🟣 En línea</span>
+    </div>
 
-      <!-- Stats acomodados -->
-      <div class="stats-grid">
-        <div><b>Seguidores:</b> 8210</div>
-        <div><b>Siguiendo:</b> 205</div>
-        <div><b>Nivel:</b> Lv.6</div>
-        <div><b>Género:</b> Femenino</div>
-        <div><b>País:</b> 🇵🇦 Panamá</div>
-      </div>
-    </section>
+    <!-- Stats seguidores/siguiendo -->
+    <div class="stats-grid">
+      <div><b>Seguidores:</b> 8210</div>
+      <div><b>Siguiendo:</b> 205</div>
+    </div>
 
-    <!-- Secciones en tarjetas -->
+    <!-- Stats fila de 3 -->
+    <div class="stats-3">
+      <div><b>Nivel:</b> Lv.6</div>
+      <div><b>País:</b> 🇵🇦 Panamá</div>
+      <div><b>Género:</b> Femenino</div>
+    </div>
+
+    <!-- Secciones en columna -->
     <section class="sections">
       <div class="section-card" data-section="productos">🛍️ Mis Productos</div>
       <div class="section-card" data-section="insignia">🏅 Insignia</div>
