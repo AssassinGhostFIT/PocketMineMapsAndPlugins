@@ -630,7 +630,7 @@
 
 /* MODIFICADO: Estilos para el video */
 .video-container {
-    width: 100%;
+    width: 200%;
     padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
     position: relative;
     border-radius: 10px;
