@@ -544,6 +544,11 @@
     .modal-plugin-title {
         font-size: 2rem;
     }
+
+    .details-grid-container {
+        grid-template-columns: 1fr; /* Para móviles, el video y la info están en una sola columna */
+        padding: 0 20px;
+    }
 }
 
 /* ==========================================
@@ -630,20 +635,21 @@
 
 /* MODIFICADO: Estilos para el video */
 .video-container {
-    width: 20%;
-    padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+    width: 100%; /* El video ocupará el 100% del ancho disponible en su columna */
+    max-height: 200px; /* NUEVO: Establece una altura máxima para el contenedor del video */
     position: relative;
     border-radius: 10px;
     overflow: hidden;
     border: 2px solid #4ecdc4;
+    display: flex; /* Para centrar el iframe */
+    justify-content: center; /* Para centrar el iframe */
+    align-items: center; /* Para centrar el iframe */
 }
 
 .video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 20%;
-    height: 20%;
+    width: 100%; /* El iframe ocupa el 100% del ancho del .video-container */
+    height: 100%; /* El iframe ocupa el 100% de la altura del .video-container */
+    object-fit: contain; /* NUEVO: Asegura que el video se ajuste sin distorsionarse */
     border: none;
 }
 
@@ -656,6 +662,8 @@
     padding-bottom: 15px; /* Para el scrollbar */
     scrollbar-width: thin; /* Firefox */
     scrollbar-color: rgba(78, 205, 196, 0.5) rgba(255, 255, 255, 0.1);
+    align-items: center; /* Para alinear imágenes si tienen alturas variadas */
+    min-height: 200px; /* Asegura que la galería tenga una altura mínima similar al video */
 }
 
 .image-gallery::-webkit-scrollbar {
@@ -673,13 +681,14 @@
 }
 
 .gallery-image {
-    width: 250px;
-    height: auto;
+    width: auto; /* Ajuste el ancho automáticamente */
+    height: 180px; /* Fija la altura de las imágenes, similar al video */
     flex-shrink: 0;
     border-radius: 8px;
     border: 1px solid rgba(78, 205, 196, 0.3);
     transition: transform 0.3s ease;
     cursor: pointer;
+    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsión */
 }
 
 .gallery-image:hover {
@@ -806,10 +815,4 @@
     .mobile-menu {
         display: flex;
     }
-}
-
-/* AÑADIDO: Estilos para el botón de compra al final del modal */
-.buy-button-container {
-    padding: 20px 30px 30px;
-    text-align: center;
 }
