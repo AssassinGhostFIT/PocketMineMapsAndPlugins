@@ -136,7 +136,7 @@ function openPluginModal(pluginKey) {
     const modalBody = document.getElementById('modalBody');
 
     // Generar contenido del modal
-    modalBody.innerHTML = generateModalContent(plugin);
+    modalBody.innerHTML = generateModalContent(pluginKey, plugin); // <--- AÑADIDO: Pasar pluginKey
 
     // Mostrar modal con animación
     modal.style.display = 'block';
@@ -156,8 +156,10 @@ function closePluginModal() {
 //   GENERADOR DE CONTENIDO DEL MODAL
 // ==========================================
 
-function generateModalContent(plugin) {
-    const versionsHtml = generateVersionsGrid(plugin.versions);
+// AÑADIDO: Ahora se pasa el pluginKey
+function generateModalContent(pluginKey, plugin) {
+    // AÑADIDO: Ahora se pasa el pluginKey a generateVersionsGrid
+    const versionsHtml = generateVersionsGrid(pluginKey, plugin.versions);
     const detailsHtml = generatePluginDetails(plugin);
     const mediaHtml = generateMediaSection(plugin);
 
@@ -181,24 +183,25 @@ function generateModalContent(plugin) {
     `;
 }
 
-function generateVersionsGrid(versions) {
+// MODIFICADO: Se cambió el onclick para llamar a la nueva función de detalles
+function generateVersionsGrid(pluginKey, versions) {
     let html = '';
     
-    Object.entries(versions).forEach(([key, version]) => {
+    Object.entries(versions).forEach(([versionKey, version]) => {
         const recommendedClass = version.recommended ? 'recommended' : '';
         const featuresHtml = version.features.map(feature => 
             `<li>${feature}</li>`
         ).join('');
 
         html += `
-            <div class="version-card ${recommendedClass}" onclick="selectVersion('${key}', ${version.price})">
+            <div class="version-card ${recommendedClass}">
                 <div class="version-name">${version.name}</div>
                 <div class="version-price">$${version.price} USD</div>
                 <ul class="version-features">
                     ${featuresHtml}
                 </ul>
-                <button class="version-btn">
-                    Comprar Ahora
+                <button class="version-btn" onclick="openDetailsModal('${pluginKey}', '${versionKey}')">
+                    Ver Detalles
                 </button>
             </div>
         `;
@@ -273,24 +276,87 @@ function generateMediaSection(plugin) {
 }
 
 // ==========================================
+//   AÑADIDO: NUEVAS FUNCIONES PARA EL MODAL DE DETALLES
+// ==========================================
+
+function openDetailsModal(pluginKey, versionKey) {
+    const plugin = PLUGINS_DATA[pluginKey];
+    if (!plugin) return;
+    
+    const version = plugin.versions[versionKey];
+    if (!version) return;
+
+    const modal = document.getElementById('detailsModal');
+    const modalBody = document.getElementById('detailsModalBody');
+
+    // Generar el contenido del modal de detalles
+    modalBody.innerHTML = `
+        <h2 class="modal-title">${plugin.name} - ${version.name}</h2>
+        <div class="details-grid-container">
+            <div class="details-media-card">
+                <h3>Video de Demostración</h3>
+                <div class="video-container">
+                    <iframe 
+                        width="100%" height="315"
+                        src="https://www.youtube.com/embed/${plugin.videoId}?autoplay=0" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <h3>Imágenes</h3>
+                <div class="image-gallery">
+                    ${plugin.images.map(img => `<img src="${img}" alt="Preview" style="width: 100%; max-width: 400px; margin-bottom: 10px; border-radius: 8px;">`).join('')}
+                </div>
+            </div>
+            <div class="details-info-card">
+                <div class="details-price-box">
+                    <span>Precio</span>
+                    <span class="price-amount">$${version.price} USD</span>
+                    <button class="buy-btn" onclick="handlePurchase('${versionKey}', ${version.price})">
+                        Comprar Ahora con PayPal
+                    </button>
+                </div>
+                <div class="details-features-box">
+                    <h3>Lo que obtienes:</h3>
+                    <ul class="features-list-box">
+                        ${version.features.map(f => `<li>✓ ${f}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="compatibility-box">
+                    <h3>Compatibilidad</h3>
+                    <p>PocketMine: ${plugin.compatibility.pocketmine}</p>
+                    <p>PHP: ${plugin.compatibility.php}</p>
+                    <p>MCBE: ${plugin.compatibility.mcbe}</p>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Abrir el modal de detalles
+    modal.style.display = 'flex';
+}
+
+function closeDetailsModal() {
+    const modal = document.getElementById('detailsModal');
+    modal.style.display = 'none';
+}
+
+// ==========================================
 //   FUNCIONES DE INTERACCIÓN
 // ==========================================
 
 function selectVersion(versionKey, price) {
-    // Efecto visual al seleccionar
-    const cards = document.querySelectorAll('.version-card');
-    cards.forEach(card => card.style.transform = 'scale(0.95)');
-    
-    setTimeout(() => {
-        cards.forEach(card => card.style.transform = 'scale(1)');
-    }, 150);
-
-    // Aquí iría la integración con PayPal/Gumroad
-    handlePurchase(versionKey, price);
+    // Esta función ya no se usa, la reemplazó el nuevo flujo
 }
 
 function handlePurchase(versionKey, price) {
-    // Mostrar confirmación con estilo
+    // Aquí integraremos directamente con PayPal o la pasarela de pago.
+    
+    // Primero, cierra el modal de detalles
+    closeDetailsModal();
+
+    // Ahora, muestra el modal de confirmación
     const confirmDiv = document.createElement('div');
     confirmDiv.innerHTML = `
         <div style="
@@ -320,7 +386,7 @@ function handlePurchase(versionKey, price) {
                     font-weight: bold;
                     cursor: pointer;
                 ">💳 Proceder al Pago</button>
-                <button onclick="this.parentElement.parentElement.parentElement.remove()" style="
+                <button onclick="this.parentElement.parentElement.remove()" style="
                     padding: 10px 20px;
                     border: 2px solid white;
                     border-radius: 25px;
@@ -337,14 +403,9 @@ function handlePurchase(versionKey, price) {
 }
 
 function proceedToPayment(versionKey, price) {
-    // Aquí integrarías con PayPal, Gumroad, etc.
-    alert(`🔄 Redirigiendo a PayPal para pagar $${price} USD por ${versionKey.toUpperCase()}\n\n(Esta sería la integración real con tu pasarela de pago)`);
-    
-    // Ejemplo de URL de PayPal
-    // window.open(`https://paypal.me/tuusuario/${price}`);
-    
-    // O para Gumroad:
-    // window.open(`https://gumroad.com/l/knockback-${versionKey}`);
+    // Aquí integra la URL de tu PayPal.me
+    const paypalMeLink = `https://paypal.me/tuusuario/${price}`; // REEMPLAZA "tuusuario" CON TU NOMBRE DE USUARIO REAL
+    window.open(paypalMeLink, '_blank');
 }
 
 // ==========================================
@@ -385,14 +446,19 @@ function initializeModalEffects() {
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         closePluginModal();
+        closeDetailsModal(); // También cierra el modal de detalles
     }
 });
 
 // Cerrar modal al hacer click fuera
 document.addEventListener('click', function(e) {
-    const modal = document.getElementById('pluginModal');
-    if (e.target === modal) {
+    const pluginModal = document.getElementById('pluginModal');
+    const detailsModal = document.getElementById('detailsModal');
+    if (e.target === pluginModal) {
         closePluginModal();
+    }
+    if (e.target === detailsModal) {
+        closeDetailsModal();
     }
 });
 
