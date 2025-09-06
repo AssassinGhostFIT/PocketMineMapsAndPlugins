@@ -1,5 +1,5 @@
 // ==========================================
-//   DATABASE DE PLUGINS CON VERSIONES
+//    DATABASE DE PLUGINS CON VERSIONES
 // ==========================================
 
 const PLUGINS_DATA = {
@@ -130,18 +130,25 @@ const PLUGINS_DATA = {
 };
 
 // ==========================================
-//   FUNCIONES PRINCIPALES DEL MODAL
+//    FUNCIONES PRINCIPALES DEL MODAL
 // ==========================================
 
 function openPluginModal(pluginKey) {
     const plugin = PLUGINS_DATA[pluginKey];
-    if (!plugin) return;
+    if (!plugin) {
+        console.error("Plugin not found:", pluginKey);
+        return;
+    }
 
     const modal = document.getElementById('pluginModal');
     const modalBody = document.getElementById('modalBody');
 
-    // Generar contenido del modal
+    // Generar el contenido del modal principal con las versiones
     modalBody.innerHTML = generateModalContent(pluginKey, plugin);
+    
+    // Asignar evento de cierre a la "X" del primer modal
+    const closeBtn = document.querySelector('#pluginModal .close');
+    closeBtn.onclick = closePluginModal;
 
     // Mostrar modal con animación
     modal.style.display = 'block';
@@ -158,20 +165,17 @@ function closePluginModal() {
 }
 
 // ==========================================
-//   GENERADOR DE CONTENIDO DEL MODAL
+//    GENERADOR DE CONTENIDO DEL MODAL PRINCIPAL
 // ==========================================
 
 function generateModalContent(pluginKey, plugin) {
     const versionsHtml = generateVersionsGrid(pluginKey, plugin.versions);
-    const detailsHtml = generatePluginDetails(plugin);
-    const mediaHtml = generateMediaSection(plugin);
-
+    
     return `
         <div class="modal-header">
             <h2 class="modal-plugin-title">${plugin.name}</h2>
             <p class="modal-plugin-desc">${plugin.description}</p>
         </div>
-
         <div class="version-selection">
             <h3 style="text-align: center; color: #4ecdc4; margin-bottom: 30px; font-size: 1.5rem;">
                 🚀 Elige la Versión Perfecta para Tu Servidor
@@ -180,9 +184,7 @@ function generateModalContent(pluginKey, plugin) {
                 ${versionsHtml}
             </div>
         </div>
-
-        ${detailsHtml}
-        ${mediaHtml}
+        <button class="close close-btn" onclick="closePluginModal()">✖</button>
     `;
 }
 
@@ -213,73 +215,8 @@ function generateVersionsGrid(pluginKey, versions) {
     return html;
 }
 
-function generatePluginDetails(plugin) {
-    const compatibilityBadges = Object.entries(plugin.compatibility).map(([key, value]) => 
-        `<span class="compatibility-badge">${key.toUpperCase()}: ${value}</span>`
-    ).join('');
-
-    return `
-        <div class="plugin-details">
-            <div class="details-grid">
-                <div class="detail-section">
-                    <h4>✨ Características Principales</h4>
-                    <p>Este plugin ha sido desarrollado con las últimas tecnologías y optimizado para máximo rendimiento.</p>
-                    <p>Incluye sistema anti-lag, configuraciones flexibles y soporte completo para multijugador.</p>
-                    
-                    <h4 style="margin-top: 20px;">🛡️ Compatibilidad</h4>
-                    <div class="compatibility-badges">
-                        ${compatibilityBadges}
-                    </div>
-                </div>
-                
-                <div class="detail-section">
-                    <h4>📞 Soporte Incluido</h4>
-                    <p>• Discord 24/7 con respuesta rápida</p>
-                    <p>• Instalación guiada paso a paso</p>
-                    <p>• Configuración personalizada</p>
-                    <p>• Updates y parches gratis</p>
-                    
-                    <h4 style="margin-top: 20px;">⚡ Garantías</h4>
-                    <p>• 30 días de garantía completa</p>
-                    <p>• Reembolso si no funciona</p>
-                    <p>• Soporte técnico de por vida</p>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-function generateMediaSection(plugin) {
-    const imagesHtml = plugin.images.map((img, index) => 
-        `<img src="${img}" alt="Preview ${index + 1}" style="width: 100%; max-width: 300px; margin: 10px; border-radius: 10px; border: 1px solid rgba(78, 205, 196, 0.3);">`
-    ).join('');
-
-    return `
-        <div class="plugin-media" style="margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(78, 205, 196, 0.3);">
-            <h4 style="text-align: center; color: #4ecdc4; margin-bottom: 20px; font-size: 1.3rem;">
-                🎥 Vista Previa del Plugin
-            </h4>
-            
-            <div class="video-preview">
-                <div class="video-placeholder">
-                    <p>📺 Video demostrativo disponible</p>
-                    <p style="font-size: 0.9rem; margin-top: 10px;">YouTube ID: ${plugin.videoId}</p>
-                    <p style="font-size: 0.9rem;">TikTok: ${plugin.tiktokUrl}</p>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 20px;">
-                <h5 style="color: #4ecdc4; margin-bottom: 15px;">📸 Capturas de Pantalla</h5>
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-                    ${imagesHtml}
-                </div>
-            </div>
-        </div>
-    `;
-}
-
 // ==========================================
-//   AÑADIDO: NUEVAS FUNCIONES PARA EL MODAL DE DETALLES
+//    NUEVAS FUNCIONES PARA EL MODAL DE DETALLES
 // ==========================================
 
 function openDetailsModal(pluginKey, versionKey) {
@@ -293,13 +230,38 @@ function openDetailsModal(pluginKey, versionKey) {
     const modalBody = document.getElementById('detailsModalBody');
 
     // Generar el contenido del modal de detalles
-    modalBody.innerHTML = `
+    modalBody.innerHTML = generateDetailsContent(plugin, version);
+    
+    // Ocultar el primer modal y mostrar el segundo
+    document.getElementById('pluginModal').style.display = 'none';
+    modal.style.display = 'flex';
+}
+
+function closeDetailsModal() {
+    const modal = document.getElementById('detailsModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function generateDetailsContent(plugin, version) {
+    const imagesHtml = plugin.images.map(img => 
+        `<img src="${img}" alt="Preview" class="gallery-image">`
+    ).join('');
+
+    const featuresList = version.features.map(f => 
+        `<li>✓ ${f}</li>`
+    ).join('');
+    
+    const compatibilityHtml = Object.entries(plugin.compatibility).map(([key, value]) =>
+        `<p>${key.toUpperCase()}: ${value}</p>`
+    ).join('');
+
+    return `
         <h2 class="modal-title">${plugin.name} - ${version.name}</h2>
         <div class="details-grid-container">
             <div class="details-media-column">
                 <div class="video-container">
                     <iframe 
-                        width="100%" height="315"
                         src="https://www.youtube.com/embed/${plugin.videoId}?autoplay=0" 
                         frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -307,7 +269,7 @@ function openDetailsModal(pluginKey, versionKey) {
                     </iframe>
                 </div>
                 <div class="image-gallery">
-                    ${plugin.images.map(img => `<img src="${img}" alt="Preview" class="gallery-image">`).join('')}
+                    ${imagesHtml}
                 </div>
             </div>
             <div class="details-info-card">
@@ -318,35 +280,27 @@ function openDetailsModal(pluginKey, versionKey) {
                 <div class="details-features-box">
                     <h3>Lo que obtienes:</h3>
                     <ul class="features-list-box">
-                        ${version.features.map(f => `<li>✓ ${f}</li>`).join('')}
+                        ${featuresList}
                     </ul>
                 </div>
                 <div class="compatibility-box">
                     <h3>Compatibilidad</h3>
-                    <p>PocketMine: ${plugin.compatibility.pocketmine}</p>
-                    <p>PHP: ${plugin.compatibility.php}</p>
-                    <p>MCBE: ${plugin.compatibility.mcbe}</p>
+                    ${compatibilityHtml}
                 </div>
             </div>
         </div>
         <div class="buy-button-container">
-            <button class="buy-btn" onclick="handlePurchase('${versionKey}', ${version.price})">
+            <button class="buy-btn" onclick="handlePurchase('${plugin.name}', '${version.name}', ${version.price})">
                 Comprar Ahora con PayPal
             </button>
         </div>
+        <button class="close close-btn" onclick="closeDetailsModal()">✖</button>
     `;
-
-    // Abrir el modal de detalles
-    modal.style.display = 'flex';
 }
 
-function closeDetailsModal() {
-    const modal = document.getElementById('detailsModal');
-    modal.style.display = 'none';
-}
 
 // ==========================================
-//   AÑADIDO: FUNCIONALIDAD DE BÚSQUEDA
+//    FUNCIONALIDAD DE BÚSQUEDA
 // ==========================================
 
 function filterPlugins() {
@@ -366,14 +320,10 @@ function filterPlugins() {
 }
 
 // ==========================================
-//   FUNCIONES DE INTERACCIÓN
+//    FUNCIONES DE INTERACCIÓN Y COMPRA
 // ==========================================
 
-function selectVersion(versionKey, price) {
-    // Esta función ya no se usa, la reemplazó el nuevo flujo
-}
-
-function handlePurchase(versionKey, price) {
+function handlePurchase(pluginName, versionName, price) {
     // Aquí integraremos directamente con PayPal o la pasarela de pago.
     
     // Primero, cierra el modal de detalles
@@ -381,26 +331,37 @@ function handlePurchase(versionKey, price) {
 
     // Ahora, muestra el modal de confirmación
     const confirmDiv = document.createElement('div');
+    confirmDiv.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 20000;
+        animation: fadeIn 0.3s ease-out;
+    `;
+    
     confirmDiv.innerHTML = `
         <div style="
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
             color: white;
             padding: 30px 40px;
             border-radius: 20px;
             text-align: center;
-            z-index: 20000;
             box-shadow: 0 25px 50px rgba(0,0,0,0.5);
             animation: slideInModal 0.4s ease-out;
         ">
             <h3 style="margin: 0 0 15px 0;">🚀 ¡Genial Elección!</h3>
-            <p style="margin: 0 0 20px 0;">Versión: ${versionKey.toUpperCase()}</p>
+            <p style="margin: 0 0 20px 0;">Plugin: ${pluginName}</p>
+            <p style="margin: 0 0 20px 0;">Versión: ${versionName}</p>
             <p style="margin: 0 0 20px 0; font-size: 1.5rem; font-weight: bold;">$${price} USD</p>
-            <div style="display: flex; gap: 15px;">
-                <button onclick="proceedToPayment('${versionKey}', ${price})" style="
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button onclick="proceedToPayment(${price})" style="
                     padding: 10px 20px;
                     border: none;
                     border-radius: 25px;
@@ -409,7 +370,7 @@ function handlePurchase(versionKey, price) {
                     font-weight: bold;
                     cursor: pointer;
                 ">💳 Proceder al Pago</button>
-                <button onclick="this.parentElement.parentElement.remove()" style="
+                <button onclick="this.parentElement.parentElement.parentElement.remove()" style="
                     padding: 10px 20px;
                     border: 2px solid white;
                     border-radius: 25px;
@@ -425,14 +386,14 @@ function handlePurchase(versionKey, price) {
     document.body.appendChild(confirmDiv);
 }
 
-function proceedToPayment(versionKey, price) {
+function proceedToPayment(price) {
     // Aquí integra la URL de tu PayPal.me
     const paypalMeLink = `https://paypal.me/tuusuario/${price}`; // REEMPLAZA "tuusuario" CON TU NOMBRE DE USUARIO REAL
     window.open(paypalMeLink, '_blank');
 }
 
 // ==========================================
-//   EFECTOS Y ANIMACIONES DEL MODAL
+//    EFECTOS Y ANIMACIONES DEL MODAL
 // ==========================================
 
 function initializeModalEffects() {
@@ -462,14 +423,20 @@ function initializeModalEffects() {
 }
 
 // ==========================================
-//   EVENTOS GLOBALES
+//    EVENTOS GLOBALES
 // ==========================================
 
 // Cerrar modal con Escape
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-        closePluginModal();
-        closeDetailsModal(); // También cierra el modal de detalles
+        const detailsModal = document.getElementById('detailsModal');
+        const pluginModal = document.getElementById('pluginModal');
+        
+        if (detailsModal.style.display === 'flex') {
+            closeDetailsModal();
+        } else if (pluginModal.style.display === 'block') {
+            closePluginModal();
+        }
     }
 });
 
@@ -477,6 +444,7 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('click', function(e) {
     const pluginModal = document.getElementById('pluginModal');
     const detailsModal = document.getElementById('detailsModal');
+    
     if (e.target === pluginModal) {
         closePluginModal();
     }
@@ -486,7 +454,7 @@ document.addEventListener('click', function(e) {
 });
 
 // ==========================================
-//   INICIALIZACIÓN DE LA PÁGINA
+//    INICIALIZACIÓN DE LA PÁGINA
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', function() {
