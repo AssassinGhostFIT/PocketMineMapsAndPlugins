@@ -30,6 +30,64 @@
 }
 
 /* ==========================================
+   AÑADIDO: SEARCH SECTION
+========================================== */
+.search-section {
+    padding: 20px 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(78, 205, 196, 0.3);
+    border-radius: 50px;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+.search-container:focus-within {
+    box-shadow: 0 0 20px rgba(78, 205, 196, 0.4);
+}
+
+#pluginSearch {
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 1rem;
+    padding: 10px 20px;
+}
+
+.search-btn {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.search-btn:hover {
+    transform: scale(1.1);
+}
+
+.search-btn svg {
+    width: 20px;
+    height: 20px;
+    color: white;
+}
+
+/* ==========================================
    PLUGINS CATALOG
 ========================================== */
 
@@ -362,7 +420,7 @@
     width: 100%;
     padding: 12px 20px;
     border: none;
-    border-radius: 25px;
+    border-radius: 50px;
     background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
     color: white;
     font-weight: bold;
@@ -370,6 +428,8 @@
     letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .version-btn:hover {
@@ -554,7 +614,13 @@
     }
 }
 
-.details-media-card h3 {
+.details-media-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.details-media-column h3 {
     color: #4ecdc4;
     font-size: 1.3rem;
     margin-bottom: 15px;
@@ -580,20 +646,36 @@
 
 .image-gallery {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     gap: 15px;
-    margin-top: 20px;
+    padding-bottom: 10px; /* Espacio para el scrollbar */
 }
 
-.image-gallery img {
-    max-width: 100%;
+.image-gallery::-webkit-scrollbar {
+    height: 8px;
+}
+
+.image-gallery::-webkit-scrollbar-thumb {
+    background: rgba(78, 205, 196, 0.5);
+    border-radius: 10px;
+}
+
+.image-gallery::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.gallery-image {
+    width: 250px;
+    height: auto;
+    flex-shrink: 0;
     border-radius: 8px;
     border: 1px solid rgba(78, 205, 196, 0.3);
     transition: transform 0.3s ease;
 }
 
-.image-gallery img:hover {
+.gallery-image:hover {
     transform: scale(1.05);
 }
 
@@ -712,4 +794,10 @@
     .mobile-menu {
         display: flex;
     }
+}
+
+/* AÑADIDO: Estilos para el botón de compra al final del modal */
+.buy-button-container {
+    padding: 20px 30px 30px;
+    text-align: center;
 }
