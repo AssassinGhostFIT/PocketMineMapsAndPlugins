@@ -272,7 +272,6 @@
     background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
     animation: fadeIn 0.3s ease-out;
-    /* Asegura que el modal esté centrado */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -280,7 +279,6 @@
 
 .modal-content {
     background: linear-gradient(135deg, rgba(15, 15, 35, 0.95), rgba(26, 0, 51, 0.95));
-    /* margin: 5% auto; */ /* Eliminado para usar flexbox para centrado */
     padding: 0;
     border: 1px solid rgba(78, 205, 196, 0.5);
     border-radius: 20px;
@@ -570,26 +568,28 @@
     }
 }
 
-/* NUEVO: Contenedor para el video y la galería, uno al lado del otro */
+/* MODIFICADO: Contenedor para el video y la galería */
 .details-media-column {
+    /* Cambiado de 'column' a 'row' para que el video y la galería estén uno al lado del otro */
     display: flex;
-    flex-direction: column;
+    flex-direction: row; 
     gap: 20px;
+    align-items: flex-start; /* Alinea los elementos en la parte superior del contenedor */
 }
 
 /* MODIFICADO: Estilos para el video - AHORA MÁS CUADRADO */
 .video-container {
-    width: 50%;
-    /* NUEVO: Usamos padding-top para controlar la relación de aspecto del video (16:9 es 56.25%, 4:3 es 75%, 1:1 es 100%) */
-    padding-top: 50%; /* Esto hace el video 4:3 (más cuadrado que 16:9) */
+    width: 50%; /* Ocupa la mitad del espacio de la fila */
+    padding-top: 50%; /* Esto hace el video 1:1 (cuadrado perfecto) */
     position: relative;
     border-radius: 10px;
     overflow: hidden;
     border: 2px solid #4ecdc4;
+    flex-shrink: 0; /* Evita que se encoja cuando hay otras imágenes */
 }
 
 .video-container iframe {
-    position: absolute; /* Permite que el iframe ocupe todo el espacio del contenedor */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -599,18 +599,20 @@
 
 /* MODIFICADO: Galería de imágenes deslizable */
 .image-gallery {
+    /* Ocupa la otra mitad de la fila */
+    width: 50%; 
     display: flex;
-    flex-wrap: nowrap; /* Impide que las imágenes salten a la siguiente línea */
-    overflow-x: auto; /* Permite el scroll horizontal */
+    flex-wrap: nowrap;
+    overflow-x: auto;
     gap: 15px;
-    padding-bottom: 15px; /* Para el scrollbar */
-    scrollbar-width: thin; /* Firefox */
+    padding-bottom: 15px;
+    scrollbar-width: thin;
     scrollbar-color: rgba(78, 205, 196, 0.5) rgba(255, 255, 255, 0.1);
-    align-items: center; /* Para alinear imágenes si tienen alturas variadas */
-    min-height: 180px; /* Altura mínima consistente para la galería */
-    background: rgba(255, 255, 255, 0.05); /* Fondo para la galería */
+    align-items: center;
+    min-height: 180px;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
-    padding: 10px 15px; /* Padding interno para que no se peguen a los bordes */
+    padding: 10px 15px;
     border: 1px solid rgba(78, 205, 196, 0.3);
 }
 
@@ -629,14 +631,14 @@
 }
 
 .gallery-image {
-    width: auto; /* Ajuste el ancho automáticamente */
-    height: 150px; /* Fija la altura de las imágenes */
-    flex-shrink: 0; /* Impide que las imágenes se encojan */
+    width: auto;
+    height: 150px;
+    flex-shrink: 0;
     border-radius: 8px;
     border: 1px solid rgba(78, 205, 196, 0.3);
     transition: transform 0.3s ease;
     cursor: pointer;
-    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsión */
+    object-fit: cover;
 }
 
 .gallery-image:hover {
