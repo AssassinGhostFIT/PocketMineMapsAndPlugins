@@ -16,7 +16,9 @@ const PLUGINS_DATA = {
         images: [
             "https://via.placeholder.com/600x300/4ecdc4/ffffff?text=KNOCKBACK+PREVIEW+1",
             "https://via.placeholder.com/600x300/45b7d1/ffffff?text=KNOCKBACK+PREVIEW+2",
-            "https://via.placeholder.com/600x300/96ceb4/ffffff?text=KNOCKBACK+PREVIEW+3"
+            "https://via.placeholder.com/600x300/96ceb4/ffffff?text=KNOCKBACK+PREVIEW+3",
+            "https://via.placeholder.com/600x300/ffeaa7/333333?text=KNOCKBACK+PREVIEW+4",
+            "https://via.placeholder.com/600x300/ff6b6b/ffffff?text=KNOCKBACK+PREVIEW+5"
         ],
         versions: {
             starter: {
@@ -90,7 +92,10 @@ const PLUGINS_DATA = {
         },
         images: [
             "https://via.placeholder.com/600x300/45b7d1/ffffff?text=SKYWARS+ARENA+1",
-            "https://via.placeholder.com/600x300/4ecdc4/ffffff?text=SKYWARS+COMBAT+2"
+            "https://via.placeholder.com/600x300/4ecdc4/ffffff?text=SKYWARS+COMBAT+2",
+            "https://via.placeholder.com/600x300/96ceb4/ffffff?text=SKYWARS+LOBBY+3",
+            "https://via.placeholder.com/600x300/ffeaa7/333333?text=SKYWARS+KITS+4",
+            "https://via.placeholder.com/600x300/ff6b6b/ffffff?text=SKYWARS+STATS+5"
         ],
         versions: {
             basic: {
@@ -136,7 +141,7 @@ function openPluginModal(pluginKey) {
     const modalBody = document.getElementById('modalBody');
 
     // Generar contenido del modal
-    modalBody.innerHTML = generateModalContent(pluginKey, plugin); // <--- AÑADIDO: Pasar pluginKey
+    modalBody.innerHTML = generateModalContent(pluginKey, plugin);
 
     // Mostrar modal con animación
     modal.style.display = 'block';
@@ -156,9 +161,7 @@ function closePluginModal() {
 //   GENERADOR DE CONTENIDO DEL MODAL
 // ==========================================
 
-// AÑADIDO: Ahora se pasa el pluginKey
 function generateModalContent(pluginKey, plugin) {
-    // AÑADIDO: Ahora se pasa el pluginKey a generateVersionsGrid
     const versionsHtml = generateVersionsGrid(pluginKey, plugin.versions);
     const detailsHtml = generatePluginDetails(plugin);
     const mediaHtml = generateMediaSection(plugin);
@@ -293,8 +296,7 @@ function openDetailsModal(pluginKey, versionKey) {
     modalBody.innerHTML = `
         <h2 class="modal-title">${plugin.name} - ${version.name}</h2>
         <div class="details-grid-container">
-            <div class="details-media-card">
-                <h3>Video de Demostración</h3>
+            <div class="details-media-column">
                 <div class="video-container">
                     <iframe 
                         width="100%" height="315"
@@ -304,18 +306,14 @@ function openDetailsModal(pluginKey, versionKey) {
                         allowfullscreen>
                     </iframe>
                 </div>
-                <h3>Imágenes</h3>
                 <div class="image-gallery">
-                    ${plugin.images.map(img => `<img src="${img}" alt="Preview" style="width: 100%; max-width: 400px; margin-bottom: 10px; border-radius: 8px;">`).join('')}
+                    ${plugin.images.map(img => `<img src="${img}" alt="Preview" class="gallery-image">`).join('')}
                 </div>
             </div>
             <div class="details-info-card">
                 <div class="details-price-box">
                     <span>Precio</span>
                     <span class="price-amount">$${version.price} USD</span>
-                    <button class="buy-btn" onclick="handlePurchase('${versionKey}', ${version.price})">
-                        Comprar Ahora con PayPal
-                    </button>
                 </div>
                 <div class="details-features-box">
                     <h3>Lo que obtienes:</h3>
@@ -331,6 +329,11 @@ function openDetailsModal(pluginKey, versionKey) {
                 </div>
             </div>
         </div>
+        <div class="buy-button-container">
+            <button class="buy-btn" onclick="handlePurchase('${versionKey}', ${version.price})">
+                Comprar Ahora con PayPal
+            </button>
+        </div>
     `;
 
     // Abrir el modal de detalles
@@ -340,6 +343,26 @@ function openDetailsModal(pluginKey, versionKey) {
 function closeDetailsModal() {
     const modal = document.getElementById('detailsModal');
     modal.style.display = 'none';
+}
+
+// ==========================================
+//   AÑADIDO: FUNCIONALIDAD DE BÚSQUEDA
+// ==========================================
+
+function filterPlugins() {
+    const input = document.getElementById('pluginSearch').value.toLowerCase();
+    const pluginCards = document.querySelectorAll('.plugin-card');
+
+    pluginCards.forEach(card => {
+        const pluginName = card.querySelector('.plugin-name').textContent.toLowerCase();
+        const pluginDescription = card.querySelector('.plugin-description').textContent.toLowerCase();
+        
+        if (pluginName.includes(input) || pluginDescription.includes(input)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
 }
 
 // ==========================================
