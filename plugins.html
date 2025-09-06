@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plugins Premium - PocketMine Maps And Plugins</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="plugins.css">
+</head>
+<body>
+    <!-- Fondo cósmico -->
+    <div class="cosmic-bg">
+        <div class="stars" id="stars"></div>
+        <div class="nebula"></div>
+        <div class="nebula"></div>
+        <div class="nebula"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <a href="index.html">PocketMine Maps & Plugins</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="plugins.html" class="active">Plugins</a></li>
+                <li><a href="maps.html">Mapas</a></li>
+                <li><a href="index.html#contact">Contacto</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Plugins -->
+    <section class="plugins-hero">
+        <div class="plugins-hero-content">
+            <h1 class="plugins-title">PLUGINS PREMIUM</h1>
+            <p class="plugins-subtitle">Transforma tu servidor con plugins de última generación</p>
+        </div>
+    </section>
+
+    <!-- Plugin Cards -->
+    <section class="plugins-catalog">
+        <div class="plugins-container">
+            
+            <!-- Knockback Plugin -->
+            <div class="plugin-card" data-plugin="knockback">
+                <div class="plugin-image">
+                    <img src="https://via.placeholder.com/400x250/4ecdc4/ffffff?text=KNOCKBACK+SYSTEM" alt="Knockback Plugin">
+                    <div class="plugin-badge">🔥 POPULAR</div>
+                </div>
+                <div class="plugin-info">
+                    <h3 class="plugin-name">Knockback System</h3>
+                    <p class="plugin-description">
+                        Sistema de knockback avanzado con efectos cinematográficos, partículas épicas y anti-cheat integrado.
+                    </p>
+                    <div class="plugin-features">
+                        <span class="feature-tag">⚡ Ultra Optimizado</span>
+                        <span class="feature-tag">🛡️ Anti-Cheat</span>
+                        <span class="feature-tag">🎨 Partículas</span>
+                    </div>
+                    <div class="plugin-pricing">
+                        <span class="price-from">Desde</span>
+                        <span class="price-amount">$25 USD</span>
+                    </div>
+                    <button class="plugin-btn" onclick="openPluginModal('knockback')">
+                        Ver Versiones
+                    </button>
+                </div>
+            </div>
+
+            <!-- Skywars Plugin -->
+            <div class="plugin-card" data-plugin="skywars">
+                <div class="plugin-image">
+                    <img src="https://via.placeholder.com/400x250/45b7d1/ffffff?text=SKYWARS+ARENA" alt="Skywars Plugin">
+                    <div class="plugin-badge">🚀 PRÓXIMAMENTE</div>
+                </div>
+                <div class="plugin-info">
+                    <h3 class="plugin-name">Skywars Arena</h3>
+                    <p class="plugin-description">
+                        Minijuego completo de Skywars con múltiples mapas, kits personalizables y sistema de estadísticas.
+                    </p>
+                    <div class="plugin-features">
+                        <span class="feature-tag">🗺️ Multi-Arena</span>
+                        <span class="feature-tag">📊 Estadísticas</span>
+                        <span class="feature-tag">🎁 Kits</span>
+                    </div>
+                    <div class="plugin-pricing">
+                        <span class="price-from">Desde</span>
+                        <span class="price-amount">$35 USD</span>
+                    </div>
+                    <button class="plugin-btn coming-soon" disabled>
+                        Próximamente
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bedwars Plugin -->
+            <div class="plugin-card" data-plugin="bedwars">
+                <div class="plugin-image">
+                    <img src="https://via.placeholder.com/400x250/96ceb4/ffffff?text=BEDWARS+EPIC" alt="Bedwars Plugin">
+                    <div class="plugin-badge">🚀 PRÓXIMAMENTE</div>
+                </div>
+                <div class="plugin-info">
+                    <h3 class="plugin-name">Bedwars Epic</h3>
+                    <p class="plugin-description">
+                        El minijuego Bedwars más completo con teams, generadores automáticos y tienda integrada.
+                    </p>
+                    <div class="plugin-features">
+                        <span class="feature-tag">👥 Teams</span>
+                        <span class="feature-tag">⚙️ Generadores</span>
+                        <span class="feature-tag">🏪 Tienda</span>
+                    </div>
+                    <div class="plugin-pricing">
+                        <span class="price-from">Desde</span>
+                        <span class="price-amount">$40 USD</span>
+                    </div>
+                    <button class="plugin-btn coming-soon" disabled>
+                        Próximamente
+                    </button>
+                </div>
+            </div>
+
+            <!-- LobbyCore Plugin -->
+            <div class="plugin-card" data-plugin="lobbycore">
+                <div class="plugin-image">
+                    <img src="https://via.placeholder.com/400x250/ffeaa7/333333?text=LOBBY+CORE" alt="LobbyCore Plugin">
+                    <div class="plugin-badge">🚀 PRÓXIMAMENTE</div>
+                </div>
+                <div class="plugin-info">
+                    <h3 class="plugin-name">LobbyCore Ultimate</h3>
+                    <p class="plugin-description">
+                        Sistema completo de lobby con NPCs, hologramas, portales y efectos visuales impresionantes.
+                    </p>
+                    <div class="plugin-features">
+                        <span class="feature-tag">🤖 NPCs</span>
+                        <span class="feature-tag">✨ Hologramas</span>
+                        <span class="feature-tag">🌀 Portales</span>
+                    </div>
+                    <div class="plugin-pricing">
+                        <span class="price-from">Desde</span>
+                        <span class="price-amount">$30 USD</span>
+                    </div>
+                    <button class="plugin-btn coming-soon" disabled>
+                        Próximamente
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Modal para selección de versiones -->
+    <div id="pluginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePluginModal()">&times;</span>
+            <div class="modal-body" id="modalBody">
+                <!-- Contenido dinámico aquí -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>PocketMine Maps & Plugins</h3>
+                <p>Creando el futuro de Minecraft Bedrock</p>
+            </div>
+            <div class="footer-section">
+                <h4>Soporte</h4>
+                <ul>
+                    <li><a href="#discord">Discord 24/7</a></li>
+                    <li><a href="#email">Soporte Email</a></li>
+                    <li><a href="#docs">Documentación</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Compatibilidad</h4>
+                <ul>
+                    <li>PocketMine 5.0.0+</li>
+                    <li>PHP 8.0+</li>
+                    <li>Todas las versiones MCBE</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 PocketMine Maps & Plugins. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="plugins.js"></script>
+</body>
+</html>
