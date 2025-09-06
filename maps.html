@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapas Premium - PocketMine Maps And Plugins</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .coming-soon-hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        .coming-soon-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease infinite;
+            margin-bottom: 30px;
+        }
+
+        .coming-soon-subtitle {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .coming-soon-description {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            max-width: 700px;
+            margin-bottom: 40px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .price-info {
+            background: rgba(78, 205, 196, 0.1);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+        }
+
+        .price-info h3 {
+            color: #4ecdc4;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .price-range {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4ecdc4;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .notify-form {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .notify-form h4 {
+            color: #4ecdc4;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            box-shadow: 0 0 15px rgba(78, 205, 196, 0.3);
+        }
+
+        .notify-btn {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .notify-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .features-preview {
+            padding: 80px 5%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .preview-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 50px;
+            background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .preview-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .preview-card:hover {
+            transform: translateY(-10px);
+            border-color: #4ecdc4;
+            box-shadow: 0 20px 40px rgba(78, 205, 196, 0.2);
+        }
+
+        .preview-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .preview-card h4 {
+            color: #4ecdc4;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .countdown {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .countdown-item {
+                min-width: 70px;
+                padding: 15px;
+            }
+
+            .price-info, .notify-form {
+                margin-left: 3%;
+                margin-right: 3%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fondo cósmico -->
+    <div class="cosmic-bg">
+        <div class="stars" id="stars"></div>
+        <div class="nebula"></div>
+        <div class="nebula"></div>
+        <div class="nebula"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <a href="index.html">PocketMine Maps & Plugins</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="plugins.html">Plugins</a></li>
+                <li><a href="maps.html" class="active">Mapas</a></li>
+                <li><a href="index.html#contact">Contacto</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Coming Soon Hero -->
+    <section class="coming-soon-hero">
+        <h1 class="coming-soon-title">MAPAS ÉPICOS</h1>
+        <h2 class="coming-soon-subtitle">🚧 Próximamente</h2>
+        <p class="coming-soon-description">
+            Estamos trabajando en una colección increíble de mapas custom para tu servidor. 
+            Desde arenas PvP hasta mundos de aventura, cada mapa será una obra maestra.
+        </p>
+
+        <div class="price-info">
+            <h3>💰 Rango de Precios Estimado</h3>
+            <div class="price-range">$5 - $30 USD</div>
+            <p style="color: rgba(255, 255, 255, 0.7); margin: 0;">
+                Según investigación de mercado actual
+            </p>
+        </div>
+
+        <div class="countdown" id="countdown">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">30</span>
+                <span class="countdown-label">Días</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Horas</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Min</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Seg</span>
+            </div>
+        </div>
+
+        <div class="notify-form">
+            <h4>🔔 ¡Sé el Primero en Saberlo!</h4>
+            <form onsubmit="subscribeNotification(event)">
+                <div class="form-group">
+                    <input type="email" class="form-input" placeholder="tu@email.com" required>
+                </div>
+                <button type="submit" class="notify-btn">
+                    Notificarme al Lanzar
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Features Preview -->
+    <section class="features-preview">
+        <h2 class="preview-title">Lo Que Estamos Preparando</h2>
+        <div class="preview-grid">
+            <div class="preview-card">
+                <span class="preview-icon">⚔️</span>
+                <h4>Arenas PvP</h4>
+                <p>Mapas diseñados específicamente para combate intenso con spawns balanceados y rutas estratégicas.</p>
+            </div>
+            <div class="preview-card">
+                <span class="preview-icon">🗺️</span>
+                <h4>Mundos de Aventura</h4>
+                <p>Experiencias inmersivas con puzzles, secretos y narrativas que mantendrán a los jugadores enganchados.</p>
+            </div>
+            <div class="preview-card">
+                <span class="preview-icon">🏰</span>
+                <h4>Construcciones Épicas</h4>
+                <p>Castillos, ciudades y estructuras monumentales que servirán como base para tus minijuegos.</p>
+            </div>
+            <div class="preview-card">
+                <span class="preview-icon">🎯</span>
+                <h4>Mapas Temáticos</h4>
+                <p>Diferentes ambientaciones: medieval, futurista, post-apocalíptico y más para cada tipo de servidor.</p>
+            </div>
+            <div class="preview-card">
+                <span class="preview-icon">⚡</span>
+                <h4>Optimizados</h4>
+                <p>Todos nuestros mapas están optimizados para máximo rendimiento sin sacrificar la calidad visual.</p>
+            </div>
+            <div class="preview-card">
+                <span class="preview-icon">🛠️</span>
+                <h4>Customizables</h4>
+                <p>Cada mapa incluirá variaciones y elementos modificables para adaptarse a tu visión única.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>PocketMine Maps & Plugins</h3>
+                <p>Creando el futuro de Minecraft Bedrock</p>
+            </div>
+            <div class="footer-section">
+                <h4>Desarrollo</h4>
+                <ul>
+                    <li>🚀 Plugins: Disponibles</li>
+                    <li>🗺️ Mapas: En desarrollo</li>
+                    <li>📱 Soporte: 24/7</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Progreso</h4>
+                <ul>
+                    <li>Knockback System: ✅</li>
+                    <li>Skywars Arena: 🔄 70%</li>
+                    <li>Mapas Custom: 🔄 30%</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 PocketMine Maps & Plugins. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Countdown timer
+        function startCountdown() {
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + 30); // 30 días desde hoy
+
+            function updateCountdown() {
+                const now = new Date();
+                const timeDifference = targetDate - now;
+
+                const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+                if (timeDifference < 0) {
+                    document.querySelector('.countdown').innerHTML = '<h2 style="color: #4ecdc4;">🎉 ¡Ya Disponible!</h2>';
+                }
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        function subscribeNotification(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            
+            // Simular suscripción
+            const button = event.target.querySelector('.notify-btn');
+            const originalText = button.textContent;
+            
+            button.textContent = 'Suscribiendo...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.textContent = '✅ ¡Suscrito!';
+                button.style.background = 'linear-gradient(45deg, #4ecdc4, #96ceb4)';
+                
+                // Mostrar mensaje de confirmación
+                const confirmation = document.createElement('div');
+                confirmation.innerHTML = `
+                    <div style="
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+                        color: white;
+                        padding: 15px 25px;
+                        border-radius: 10px;
+                        z-index: 10000;
+                        animation: slideInRight 0.5s ease-out;
+                        box-shadow: 0 10px 30px rgba(78, 205, 196, 0.3);
+                    ">
+                        <strong>🎉 ¡Perfecto!</strong><br>
+                        Te notificaremos a: <strong>${email}</strong>
+                    </div>
+                `;
+                document.body.appendChild(confirmation);
+                
+                setTimeout(() => {
+                    confirmation.remove();
+                }, 4000);
+                
+                // Reset form después de 3 segundos
+                setTimeout(() => {
+                    event.target.reset();
+                    button.textContent = originalText;
+                    button.disabled = false;
+                    button.style.background = 'linear-gradient(45deg, #ff6b6b, #4ecdc4)';
+                }, 3000);
+            }, 1500);
+        }
+
+        // Inicializar cuando carga la página
+        document.addEventListener('DOMContentLoaded', function() {
+            startCountdown();
+        });
+    </script>
+</body>
+</html>
