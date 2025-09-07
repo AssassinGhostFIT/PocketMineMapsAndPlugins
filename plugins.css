@@ -479,131 +479,191 @@
     font-weight: bold;
 }
 
-/* CORREGIDO: Layout como BreadBuilds - Video arriba, galería abajo, info al lado */
+/* CORREGIDO: Layout con carrusel - Video e imágenes en mismo contenedor deslizable */
 .details-grid-container {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 30px;
+    gap: 25px;
     color: rgba(255, 255, 255, 0.8);
     padding: 0 20px;
 }
 
 .details-media-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    position: relative;
 }
 
-/* CORREGIDO: Video primero, tamaño grande */
-.video-container {
-    width: 100%;
-    padding-top: 56.25%; /* 16:9 aspect ratio */
+/* Carrusel contenedor principal */
+.media-carousel {
     position: relative;
+    width: 100%;
+    height: 300px;
     border-radius: 15px;
     overflow: hidden;
-    border: 2px solid rgba(78, 205, 196, 0.5);
+    border: 2px solid rgba(78, 205, 196, 0.3);
     background: rgba(0, 0, 0, 0.3);
 }
 
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
+/* Contenedor deslizable */
+.carousel-container {
+    display: flex;
+    height: 100%;
+    transition: transform 0.4s ease;
+}
+
+/* Elementos del carrusel (video e imágenes) */
+.carousel-item {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Video dentro del carrusel */
+.carousel-item.video-item {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-item iframe {
+    width: 90%;
+    height: 90%;
+    border: none;
+    border-radius: 10px;
+}
+
+/* Imágenes dentro del carrusel */
+.carousel-item.image-item {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.carousel-item img {
     width: 100%;
     height: 100%;
-    border: none;
-    border-radius: 13px;
-}
-
-/* CORREGIDO: Galería deslizable debajo del video */
-.image-gallery {
-    width: 100%;
-    display: flex;
-    gap: 15px;
-    overflow-x: auto;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
-    border: 1px solid rgba(78, 205, 196, 0.3);
-    scrollbar-width: thin;
-    scrollbar-color: rgba(78, 205, 196, 0.5) rgba(255, 255, 255, 0.1);
-}
-
-.image-gallery::-webkit-scrollbar {
-    height: 8px;
-}
-
-.image-gallery::-webkit-scrollbar-thumb {
-    background: rgba(78, 205, 196, 0.5);
-    border-radius: 10px;
-}
-
-.image-gallery::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-}
-
-.gallery-image {
-    width: 150px;
-    height: 100px;
-    flex-shrink: 0;
-    border-radius: 10px;
-    border: 1px solid rgba(78, 205, 196, 0.3);
-    transition: transform 0.3s ease;
-    cursor: pointer;
     object-fit: cover;
 }
 
-.gallery-image:hover {
-    transform: scale(1.05);
-    border-color: #4ecdc4;
+/* Botones de navegación */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: #4ecdc4;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    z-index: 10;
 }
 
-/* Info card al lado derecho */
+.carousel-nav:hover {
+    background: rgba(78, 205, 196, 0.8);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-nav.prev {
+    left: 10px;
+}
+
+.carousel-nav.next {
+    right: 10px;
+}
+
+/* Indicadores */
+.carousel-indicators {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.carousel-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-indicator.active {
+    background: #4ecdc4;
+    transform: scale(1.2);
+}
+
+/* Etiqueta de tipo de contenido */
+.content-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #4ecdc4;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 10;
+}
+
+/* Info card al lado derecho - TAMAÑO CONTROLADO */
 .details-info-card {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 10px;
+    gap: 15px;
+    padding: 0;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .details-price-box {
     background: rgba(78, 205, 196, 0.1);
     border: 2px solid rgba(78, 205, 196, 0.5);
     border-radius: 15px;
-    padding: 25px;
+    padding: 20px;
     text-align: center;
+    box-sizing: border-box;
 }
 
 .details-price-box span:first-child {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: rgba(255, 255, 255, 0.7);
-    font-size: 1rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .details-price-box .price-amount {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
     background: linear-gradient(45deg, #4ecdc4, #45b7d1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin: 0;
+    word-break: break-word;
 }
 
 .details-features-box, .compatibility-box {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(78, 205, 196, 0.3);
     border-radius: 15px;
-    padding: 20px;
+    padding: 15px;
+    box-sizing: border-box;
 }
 
 .details-features-box h3, .compatibility-box h3 {
     color: #4ecdc4;
-    font-size: 1.2rem;
-    margin-bottom: 15px;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
     font-weight: bold;
 }
 
@@ -614,22 +674,25 @@
 }
 
 .features-list-box li {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: rgba(255, 255, 255, 0.8);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    word-wrap: break-word;
 }
 
 .features-list-box li::before {
     content: '✓';
     color: #4ecdc4;
     font-weight: bold;
-    margin-right: 10px;
+    margin-right: 8px;
 }
 
 .compatibility-box p {
     color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 8px;
-    font-size: 0.9rem;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    word-wrap: break-word;
 }
 
 .buy-button-container {
