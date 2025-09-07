@@ -130,6 +130,13 @@ const PLUGINS_DATA = {
 };
 
 // ==========================================
+//    VARIABLES DEL CARRUSEL
+// ==========================================
+let currentSlide = 0;
+let totalSlides = 0;
+let carouselInterval;
+
+// ==========================================
 //    FUNCIONES PRINCIPALES DEL MODAL
 // ==========================================
 
@@ -151,7 +158,7 @@ function openPluginModal(pluginKey) {
     closeBtn.onclick = closePluginModal;
 
     // Mostrar modal con animación
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 
     // Inicializar efectos del modal
@@ -188,7 +195,6 @@ function generateModalContent(pluginKey, plugin) {
     `;
 }
 
-// MODIFICADO: Se cambió el onclick para llamar a la nueva función de detalles
 function generateVersionsGrid(pluginKey, versions) {
     let html = '';
     
@@ -216,7 +222,7 @@ function generateVersionsGrid(pluginKey, versions) {
 }
 
 // ==========================================
-//    NUEVAS FUNCIONES PARA EL MODAL DE DETALLES
+//    FUNCIONES DEL MODAL DE DETALLES CON CARRUSEL
 // ==========================================
 
 function openDetailsModal(pluginKey, versionKey) {
@@ -235,19 +241,22 @@ function openDetailsModal(pluginKey, versionKey) {
     // Ocultar el primer modal y mostrar el segundo
     document.getElementById('pluginModal').style.display = 'none';
     modal.style.display = 'flex';
+
+    // Inicializar el carrusel
+    initializeCarousel();
 }
 
 function closeDetailsModal() {
     const modal = document.getElementById('detailsModal');
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
+    
+    // Limpiar el carrusel
+    clearInterval(carouselInterval);
 }
 
 function generateDetailsContent(plugin, version) {
-    const imagesHtml = plugin.images.map(img => 
-        `<img src="${img}" alt="Preview" class="gallery-image">`
-    ).join('');
-
+    const carouselHtml = generateCarousel(plugin);
     const featuresList = version.features.map(f => 
         `<li>✓ ${f}</li>`
     ).join('');
@@ -260,17 +269,7 @@ function generateDetailsContent(plugin, version) {
         <h2 class="modal-title">${plugin.name} - ${version.name}</h2>
         <div class="details-grid-container">
             <div class="details-media-column">
-                <div class="video-container">
-                    <iframe 
-                        src="https://www.youtube.com/embed/${plugin.videoId}?autoplay=0" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="image-gallery">
-                    ${imagesHtml}
-                </div>
+                ${carouselHtml}
             </div>
             <div class="details-info-card">
                 <div class="details-price-box">
@@ -298,6 +297,109 @@ function generateDetailsContent(plugin, version) {
     `;
 }
 
+function generateCarousel(plugin) {
+    // Crear items del carrusel (video + imágenes)
+    let carouselItems = '';
+    
+    // Agregar video primero
+    carouselItems += `
+        <div class="carousel-item video-item">
+            <div class="content-label">📺 VIDEO</div>
+            <iframe 
+                src="https://www.youtube.com/embed/${plugin.videoId}?autoplay=0" 
+                frameborder="0" 
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    `;
+    
+    // Agregar imágenes
+    plugin.images.forEach((img, index) => {
+        carouselItems += `
+            <div class="carousel-item image-item">
+                <div class="content-label">🖼️ IMAGEN ${index + 1}</div>
+                <img src="${img}" alt="Preview ${index + 1}">
+            </div>
+        `;
+    });
+
+    // Crear indicadores
+    const totalItems = 1 + plugin.images.length; // 1 video + imágenes
+    let indicators = '';
+    for (let i = 0; i < totalItems; i++) {
+        indicators += `
+            <div class="carousel-indicator ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></div>
+        `;
+    }
+
+    return `
+        <div class="media-carousel">
+            <div class="carousel-container" id="carouselContainer">
+                ${carouselItems}
+            </div>
+            <button class="carousel-nav prev" onclick="prevSlide()">‹</button>
+            <button class="carousel-nav next" onclick="nextSlide()">›</button>
+            <div class="carousel-indicators">
+                ${indicators}
+            </div>
+        </div>
+    `;
+}
+
+// ==========================================
+//    FUNCIONES DEL CARRUSEL
+// ==========================================
+
+function initializeCarousel() {
+    currentSlide = 0;
+    totalSlides = document.querySelectorAll('.carousel-item').length;
+    
+    // Auto-play cada 5 segundos
+    carouselInterval = setInterval(nextSlide, 5000);
+    
+    // Pausar auto-play al hover
+    const carousel = document.querySelector('.media-carousel');
+    if (carousel) {
+        carousel.addEventListener('mouseenter', () => clearInterval(carouselInterval));
+        carousel.addEventListener('mouseleave', () => {
+            carouselInterval = setInterval(nextSlide, 5000);
+        });
+    }
+}
+
+function updateCarousel() {
+    const container = document.getElementById('carouselContainer');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    
+    if (container) {
+        container.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+    
+    // Actualizar indicadores
+    indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentSlide);
+    });
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateCarousel();
+}
+
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateCarousel();
+}
+
+function goToSlide(slideIndex) {
+    currentSlide = slideIndex;
+    updateCarousel();
+    
+    // Reiniciar auto-play
+    clearInterval(carouselInterval);
+    carouselInterval = setInterval(nextSlide, 5000);
+}
 
 // ==========================================
 //    FUNCIONALIDAD DE BÚSQUEDA
@@ -324,12 +426,10 @@ function filterPlugins() {
 // ==========================================
 
 function handlePurchase(pluginName, versionName, price) {
-    // Aquí integraremos directamente con PayPal o la pasarela de pago.
-    
-    // Primero, cierra el modal de detalles
+    // Cerrar modal de detalles
     closeDetailsModal();
 
-    // Ahora, muestra el modal de confirmación
+    // Mostrar modal de confirmación
     const confirmDiv = document.createElement('div');
     confirmDiv.style.cssText = `
         position: fixed;
@@ -387,8 +487,7 @@ function handlePurchase(pluginName, versionName, price) {
 }
 
 function proceedToPayment(price) {
-    // Aquí integra la URL de tu PayPal.me
-    const paypalMeLink = `https://paypal.me/tuusuario/${price}`; // REEMPLAZA "tuusuario" CON TU NOMBRE DE USUARIO REAL
+    const paypalMeLink = `https://paypal.me/tuusuario/${price}`;
     window.open(paypalMeLink, '_blank');
 }
 
@@ -397,7 +496,6 @@ function proceedToPayment(price) {
 // ==========================================
 
 function initializeModalEffects() {
-    // Animación de entrada para las cards de versiones
     const versionCards = document.querySelectorAll('.version-card');
     versionCards.forEach((card, index) => {
         card.style.opacity = '0';
@@ -410,7 +508,6 @@ function initializeModalEffects() {
         }, index * 100);
     });
 
-    // Efecto hover mejorado para las cards
     versionCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-8px) scale(1.02)';
@@ -434,7 +531,7 @@ document.addEventListener('keydown', function(e) {
         
         if (detailsModal.style.display === 'flex') {
             closeDetailsModal();
-        } else if (pluginModal.style.display === 'block') {
+        } else if (pluginModal.style.display === 'flex') {
             closePluginModal();
         }
     }
@@ -453,17 +550,23 @@ document.addEventListener('click', function(e) {
     }
 });
 
+// Control del carrusel con teclado
+document.addEventListener('keydown', function(e) {
+    if (document.getElementById('detailsModal').style.display === 'flex') {
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+    }
+});
+
 // ==========================================
 //    INICIALIZACIÓN DE LA PÁGINA
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar efectos de la página de plugins
     initializePluginsPage();
 });
 
 function initializePluginsPage() {
-    // Animación de entrada para las cards principales
     const pluginCards = document.querySelectorAll('.plugin-card');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -475,7 +578,6 @@ function initializePluginsPage() {
 
     pluginCards.forEach(card => observer.observe(card));
 
-    // Efecto de hover mejorado para cards principales
     pluginCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-15px) scale(1.02)';
