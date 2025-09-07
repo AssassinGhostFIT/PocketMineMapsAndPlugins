@@ -258,7 +258,7 @@
 }
 
 /* ==========================================
-   MODAL STYLES (Primer Modal de Versiones)
+   MODAL STYLES (Primer Modal de Versiones) - CORREGIDO
 ========================================== */
 
 .modal {
@@ -272,7 +272,6 @@
     background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
     animation: fadeIn 0.3s ease-out;
-    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -454,92 +453,19 @@
 }
 
 /* ==========================================
-   RESPONSIVE
+   ESTILOS PARA EL SEGUNDO MODAL (DETALLES) - CORREGIDO LAYOUT
 ========================================== */
 
-@media (max-width: 768px) {
-    .plugins-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 0 3%;
-    }
-    
-    .version-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .details-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .modal-content {
-        width: 95%;
-        margin: 10% auto;
-        max-height: 90vh;
-    }
-    
-    .modal-body {
-        padding: 30px 20px 20px;
-    }
-    
-    .modal-plugin-title {
-        font-size: 2rem;
-    }
-
-    .details-grid-container {
-        grid-template-columns: 1fr; /* Para móviles, el video y la info están en una sola columna */
-        padding: 0 20px;
-    }
-}
-
-/* ==========================================
-   ANIMATIONS
-========================================== */
-
-@keyframes slideUpCard {
-    from {
-        transform: translateY(30px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideInModal {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-
-/* ==========================================
-   AÑADIDO: ESTILOS PARA EL SEGUNDO MODAL Y EL MENÚ MÓVIL
-========================================== */
-
-/* Esto mantiene el modal centrado */
 #detailsModal {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
 }
 
 #detailsModal .modal-content {
-    max-width: 900px;
+    max-width: 1000px;
     height: auto;
-    max-height: 90vh; /* Ajuste para que no ocupe toda la altura */
+    max-height: 90vh;
     overflow-y: auto;
 }
 
@@ -549,43 +475,34 @@
     background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    font-weight: bold;
 }
 
-/* MODIFICADO: Contenedor para la cuadrícula de detalles */
+/* CORREGIDO: Layout como BreadBuilds - Video arriba, galería abajo, info al lado */
 .details-grid-container {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
     color: rgba(255, 255, 255, 0.8);
-    padding: 0 20px; /* Añadido padding para móviles */
+    padding: 0 20px;
 }
 
-@media (min-width: 769px) {
-    .details-grid-container {
-        grid-template-columns: 2fr 1fr; /* 2/3 para el video/galería y 1/3 para la info */
-        padding: 0;
-    }
-}
-
-/* MODIFICADO: Contenedor para el video y la galería */
 .details-media-column {
-    /* Cambiado de 'column' a 'row' para que el video y la galería estén uno al lado del otro */
     display: flex;
-    flex-direction: row; 
+    flex-direction: column;
     gap: 20px;
-    align-items: flex-start; /* Alinea los elementos en la parte superior del contenedor */
 }
 
-/* MODIFICADO: Estilos para el video - AHORA MÁS CUADRADO */
+/* CORREGIDO: Video primero, tamaño grande */
 .video-container {
-    width: 50%; /* Ocupa la mitad del espacio de la fila */
-    padding-top: 50%; /* Esto hace el video 1:1 (cuadrado perfecto) */
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
     position: relative;
-    border-radius: 10px;
+    border-radius: 15px;
     overflow: hidden;
-    border: 2px solid #4ecdc4;
-    flex-shrink: 0; /* Evita que se encoja cuando hay otras imágenes */
+    border: 2px solid rgba(78, 205, 196, 0.5);
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .video-container iframe {
@@ -595,25 +512,21 @@
     width: 100%;
     height: 100%;
     border: none;
+    border-radius: 13px;
 }
 
-/* MODIFICADO: Galería de imágenes deslizable */
+/* CORREGIDO: Galería deslizable debajo del video */
 .image-gallery {
-    /* Ocupa la otra mitad de la fila */
-    width: 50%; 
+    width: 100%;
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
     gap: 15px;
-    padding-bottom: 15px;
+    overflow-x: auto;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(78, 205, 196, 0.3);
     scrollbar-width: thin;
     scrollbar-color: rgba(78, 205, 196, 0.5) rgba(255, 255, 255, 0.1);
-    align-items: center;
-    min-height: 180px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    padding: 10px 15px;
-    border: 1px solid rgba(78, 205, 196, 0.3);
 }
 
 .image-gallery::-webkit-scrollbar {
@@ -631,10 +544,10 @@
 }
 
 .gallery-image {
-    width: auto;
-    height: 150px;
+    width: 150px;
+    height: 100px;
     flex-shrink: 0;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid rgba(78, 205, 196, 0.3);
     transition: transform 0.3s ease;
     cursor: pointer;
@@ -643,61 +556,46 @@
 
 .gallery-image:hover {
     transform: scale(1.05);
+    border-color: #4ecdc4;
 }
 
+/* Info card al lado derecho */
 .details-info-card {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
+    padding: 10px;
 }
 
 .details-price-box {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(78, 205, 196, 0.5);
+    background: rgba(78, 205, 196, 0.1);
+    border: 2px solid rgba(78, 205, 196, 0.5);
     border-radius: 15px;
-    padding: 20px;
+    padding: 25px;
     text-align: center;
 }
 
-.details-price-box span {
+.details-price-box span:first-child {
     display: block;
     margin-bottom: 10px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .details-price-box .price-amount {
     font-size: 2.5rem;
-    margin-top: 5px;
-}
-
-.buy-button-container {
-    padding: 20px 0 0;
-    text-align: center;
-}
-
-.buy-btn {
-    width: 100%;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 50px;
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-    color: white;
-    font-size: 1rem;
     font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.buy-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+    background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
 }
 
 .details-features-box, .compatibility-box {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(78, 205, 196, 0.5);
+    border: 1px solid rgba(78, 205, 196, 0.3);
     border-radius: 15px;
     padding: 20px;
 }
@@ -706,21 +604,59 @@
     color: #4ecdc4;
     font-size: 1.2rem;
     margin-bottom: 15px;
+    font-weight: bold;
 }
 
 .features-list-box {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .features-list-box li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
 }
 
 .features-list-box li::before {
     content: '✓';
-    color: #ff6b6b;
-    margin-right: 8px;
+    color: #4ecdc4;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.compatibility-box p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.buy-button-container {
+    grid-column: 1 / -1;
+    padding: 20px 0 0;
+    text-align: center;
+}
+
+.buy-btn {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.buy-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(255, 107, 107, 0.4);
 }
 
 /* Menú móvil */
@@ -758,11 +694,90 @@
     padding: 20px 0;
 }
 
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
 @media (max-width: 768px) {
+    .plugins-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 3%;
+    }
+    
+    .version-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        max-height: 90vh;
+    }
+    
+    .modal-body {
+        padding: 30px 20px 20px;
+    }
+    
+    .modal-plugin-title {
+        font-size: 2rem;
+    }
+
+    .details-grid-container {
+        grid-template-columns: 1fr;
+        padding: 0 10px;
+    }
+    
     .nav-links {
         display: none;
     }
+    
     .mobile-menu {
         display: flex;
     }
+
+    .gallery-image {
+        width: 120px;
+        height: 80px;
+    }
+
+    .video-container {
+        padding-top: 60%; /* Más cuadrado en móvil */
+    }
+}
+
+/* ==========================================
+   ANIMATIONS
+========================================== */
+
+@keyframes slideUpCard {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInModal {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* FIX PARA ELEMENTOS MOLESTOS */
+div[style*="position: fixed"][style*="bottom"]:not(.footer) {
+    display: none !important;
 }
