@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control - Sistema de Gestión Administrativo</title>
+    <link rel="stylesheet" href="secure.css">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body class="secure-dashboard">
+    <!-- Sidebar Seguro -->
+    <nav class="secure-sidebar" id="secureSidebar">
+        <div class="sidebar-secure-header">
+            <div class="admin-secure-profile">
+                <div class="profile-secure-avatar">🔐</div>
+                <div class="profile-secure-info">
+                    <h3>Administrador</h3>
+                    <p>Acceso Total</p>
+                </div>
+            </div>
+        </div>
+
+        <ul class="secure-menu">
+            <li class="secure-menu-item active" data-section="dashboard">
+                <div class="menu-secure-icon">📊</div>
+                <span>Control Principal</span>
+            </li>
+            <li class="secure-menu-item" data-section="content">
+                <div class="menu-secure-icon">⚡</div>
+                <span>Gestión Plugins</span>
+                <div class="secure-badge">2</div>
+            </li>
+            <li class="secure-menu-item" data-section="media">
+                <div class="menu-secure-icon">🗺️</div>
+                <span>Gestión Mapas</span>
+                <div class="secure-badge">Soon</div>
+            </li>
+            <li class="secure-menu-item" data-section="users">
+                <div class="menu-secure-icon">👥</div>
+                <span>Base de Usuarios</span>
+                <div class="secure-badge">0</div>
+            </li>
+            <li class="secure-menu-item" data-section="commerce">
+                <div class="menu-secure-icon">💰</div>
+                <span>Sistema Comercial</span>
+            </li>
+            <li class="secure-menu-item" data-section="appearance">
+                <div class="menu-secure-icon">🎨</div>
+                <span>Apariencia Visual</span>
+                <div class="secure-badge">4</div>
+            </li>
+            <li class="secure-menu-item" data-section="analytics">
+                <div class="menu-secure-icon">📈</div>
+                <span>Análisis Avanzado</span>
+            </li>
+            <li class="secure-menu-item" data-section="system">
+                <div class="menu-secure-icon">⚙️</div>
+                <span>Configuración Sistema</span>
+            </li>
+        </ul>
+
+        <div class="secure-footer">
+            <button class="secure-logout" onclick="secureLogout()">
+                <span>🚪</span> Cerrar Sesión Segura
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="secure-main">
+        <!-- Barra Superior -->
+        <header class="secure-topbar">
+            <div class="topbar-secure-left">
+                <button class="sidebar-secure-toggle" onclick="toggleSecureSidebar()">☰</button>
+                <h1 class="secure-page-title" id="securePageTitle">Panel de Control Principal</h1>
+            </div>
+            <div class="topbar-secure-right">
+                <div class="secure-actions">
+                    <button class="secure-quick-btn" onclick="showSecureSection('content')" title="Gestionar Plugins">
+                        ➕ Contenido
+                    </button>
+                    <button class="secure-quick-btn" onclick="previewMainSite()" title="Ver Sitio">
+                        👁️ Sitio Web
+                    </button>
+                    <button class="secure-quick-btn" onclick="quickThemeChange()" title="Cambiar Tema">
+                        🎨 Tema
+                    </button>
+                </div>
+                <div class="secure-status">
+                    <div class="status-secure-indicator active"></div>
+                    <span>Sistema Operativo</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Contenido de Secciones -->
+        <div class="secure-content">
+
+            <!-- DASHBOARD PRINCIPAL -->
+            <section class="secure-section active" id="dashboard">
+                <div class="secure-stats-grid">
+                    <div class="secure-stat-card primary">
+                        <div class="stat-secure-header">
+                            <h3>Plugins Activos</h3>
+                            <div class="stat-secure-icon">⚡</div>
+                        </div>
+                        <div class="stat-secure-number">2</div>
+                        <div class="stat-secure-trend">↗️ Funcionando perfectamente</div>
+                    </div>
+                    <div class="secure-stat-card success">
+                        <div class="stat-secure-header">
+                            <h3>Ingresos Totales</h3>
+                            <div class="stat-secure-icon">💰</div>
+                        </div>
+                        <div class="stat-secure-number">$0</div>
+                        <div class="stat-secure-trend">🚀 Listo para despegar</div>
+                    </div>
+                    <div class="secure-stat-card warning">
+                        <div class="stat-secure-header">
+                            <h3>Usuarios Sistema</h3>
+                            <div class="stat-secure-icon">👥</div>
+                        </div>
+                        <div class="stat-secure-number">0</div>
+                        <div class="stat-secure-trend">📈 En crecimiento</div>
+                    </div>
+                    <div class="secure-stat-card info">
+                        <div class="stat-secure-header">
+                            <h3>Sesiones Activas</h3>
+                            <div class="stat-secure-icon">👀</div>
+                        </div>
+                        <div class="stat-secure-number">1</div>
+                        <div class="stat-secure-trend">✨ Administrador online</div>
+                    </div>
+                </div>
+
+                <div class="secure-widgets">
+                    <div class="secure-widget">
+                        <div class="widget-secure-header">
+                            <h3>🔥 Contenido Más Visitado</h3>
+                        </div>
+                        <div class="widget-secure-content">
+                            <div class="popular-secure-item">
+                                <div class="item-secure-info">
+                                    <span class="item-secure-name">Knockback System</span>
+                                    <span class="item-secure-views">0 visualizaciones</span>
+                                </div>
+                                <div class="item-secure-trend">📊</div>
+                            </div>
+                            <div class="popular-secure-item">
+                                <div class="item-secure-info">
+                                    <span class="item-secure-name">Skywars Arena</span>
+                                    <span class="item-secure-views">0 visualizaciones</span>
+                                </div>
+                                <div class="item-secure-trend">🔥</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="secure-widget">
+                        <div class="widget-secure-header">
+                            <h3>⚡ Acciones Administrativas</h3>
+                        </div>
+                        <div class="widget-secure-content">
+                            <div class="secure-actions-grid">
+                                <button class="secure-action-card" onclick="showSecureSection('content')">
+                                    <div class="action-secure-icon">➕</div>
+                                    <div class="action-secure-text">Nuevo Plugin</div>
+                                </button>
+                                <button class="secure-action-card" onclick="showSecureSection('appearance')">
+                                    <div class="action-secure-icon">🎨</div>
+                                    <div class="action-secure-text">Cambiar Tema</div>
+                                </button>
+                                <button class="secure-action-card" onclick="showSecureSection('users')">
+                                    <div class="action-secure-icon">👥</div>
+                                    <div class="action-secure-text">Ver Usuarios</div>
+                                </button>
+                                <button class="secure-action-card" onclick="createSystemBackup()">
+                                    <div class="action-secure-icon">💾</div>
+                                    <div class="action-secure-text">Backup Sistema</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GESTIÓN DE PLUGINS -->
+            <section class="secure-section" id="content">
+                <div class="secure-section-header">
+                    <h2>Gestión de Contenido - Plugins</h2>
+                    <button class="secure-primary-btn" onclick="showAddContentModal()">
+                        ➕ Crear Plugin
+                    </button>
+                </div>
+
+                <div class="secure-content-grid">
+                    <div class="content-secure-card" data-content="knockback">
+                        <div class="content-secure-header">
+                            <h3>Knockback System</h3>
+                            <div class="content-secure-status active">Publicado</div>
+                        </div>
+                        <div class="content-secure-stats">
+                            <div class="content-stat">
+                                <span>Versiones:</span>
+                                <strong>4</strong>
+                            </div>
+                            <div class="content-stat">
+                                <span>Desde:</span>
+                                <strong>$25</strong>
+                            </div>
+                            <div class="content-stat">
+                                <span>Ventas:</span>
+                                <strong>0</strong>
+                            </div>
+                        </div>
+                        <div class="content-secure-actions">
+                            <button class="secure-edit-btn" onclick="editSecureContent('knockback')">✏️ Editar</button>
+                            <button class="secure-view-btn" onclick="previewSecureContent('knockback')">👁️ Ver</button>
+                            <button class="secure-settings-btn" onclick="contentSecureSettings('knockback')">⚙️</button>
+                        </div>
+                    </div>
+
+                    <div class="content-secure-card" data-content="skywars">
+                        <div class="content-secure-header">
+                            <h3>Skywars Arena</h3>
+                            <div class="content-secure-status development">Desarrollo</div>
+                        </div>
+                        <div class="content-secure-stats">
+                            <div class="content-stat">
+                                <span>Versiones:</span>
+                                <strong>2</strong>
+                            </div>
+                            <div class="content-stat">
+                                <span>Desde:</span>
+                                <strong>$35</strong>
+                            </div>
+                            <div class="content-stat">
+                                <span>Ventas:</span>
+                                <strong>0</strong>
+                            </div>
+                        </div>
+                        <div class="content-secure-actions">
+                            <button class="secure-edit-btn" onclick="editSecureContent('skywars')">✏️ Editar</button>
+                            <button class="secure-view-btn" onclick="previewSecureContent('skywars')">👁️ Ver</button>
+                            <button class="secure-settings-btn" onclick="contentSecureSettings('skywars')">⚙️</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GESTIÓN DE TEMAS -->
+            <section class="secure-section" id="appearance">
+                <div class="secure-section-header">
+                    <h2>Control de Apariencia Visual</h2>
+                    <div class="current-secure-theme">
+                        Tema Activo: <strong id="currentSecureTheme">Cósmico</strong>
+                    </div>
+                </div>
+
+                <div class="secure-themes-grid">
+                    <div class="theme-secure-card active" data-theme="cosmic">
+                        <div class="theme-secure-preview cosmic-secure-preview"></div>
+                        <div class="theme-secure-info">
+                            <h3>🌌 Cósmico</h3>
+                            <p>Tema futurista por defecto</p>
+                        </div>
+                        <button class="theme-secure-btn" onclick="applySecureTheme('cosmic')">Activar</button>
+                    </div>
+
+                    <div class="theme-secure-card" data-theme="halloween">
+                        <div class="theme-secure-preview halloween-secure-preview"></div>
+                        <div class="theme-secure-info">
+                            <h3>🎃 Halloween</h3>
+                            <p>Naranja y negro tenebroso</p>
+                        </div>
+                        <button class="theme-secure-btn" onclick="applySecureTheme('halloween')">Activar</button>
+                    </div>
+
+                    <div class="theme-secure-card" data-theme="christmas">
+                        <div class="theme-secure-preview christmas-secure-preview"></div>
+                        <div class="theme-secure-info">
+                            <h3>🎄 Navidad</h3>
+                            <p>Rojo y verde festivo</p>
+                        </div>
+                        <button class="theme-secure-btn" onclick="applySecureTheme('christmas')">Activar</button>
+                    </div>
+
+                    <div class="theme-secure-card" data-theme="summer">
+                        <div class="theme-secure-preview summer-secure-preview"></div>
+                        <div class="theme-secure-info">
+                            <h3>☀️ Verano</h3>
+                            <p>Azul y amarillo tropical</p>
+                        </div>
+                        <button class="theme-secure-btn" onclick="applySecureTheme('summer')">Activar</button>
+                    </div>
+                </div>
+
+                <div class="secure-theme-customizer">
+                    <h3>🎨 Editor de Colores Personalizado</h3>
+                    <div class="secure-color-controls">
+                        <div class="secure-color-group">
+                            <label>Color Principal</label>
+                            <input type="color" id="secureColorPrimary" value="#4ecdc4">
+                        </div>
+                        <div class="secure-color-group">
+                            <label>Color Secundario</label>
+                            <input type="color" id="secureColorSecondary" value="#ff6b6b">
+                        </div>
+                        <div class="secure-color-group">
+                            <label>Color de Fondo</label>
+                            <input type="color" id="secureColorBackground" value="#0a0a0a">
+                        </div>
+                    </div>
+                    <button class="secure-apply-theme-btn" onclick="applySecureCustomTheme()">
+                        Aplicar Configuración Personalizada
+                    </button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="secure.js"></script>
+    <script>
+        // Verificar autenticación segura
+        if (localStorage.getItem('secureAdminAuth') !== 'authenticated') {
+            window.location.href = 'access.html';
+        }
+
+        // Inicializar sistema seguro
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSecureSystem();
+        });
+    </script>
+</body>
+</html>
