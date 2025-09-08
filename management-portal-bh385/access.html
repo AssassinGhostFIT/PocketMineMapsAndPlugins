@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Administrativo - Sistema de Gestión</title>
+    <link rel="stylesheet" href="secure.css">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+</head>
+<body class="secure-login">
+    <!-- Fondo seguro -->
+    <div class="secure-bg">
+        <div class="security-grid"></div>
+        <div class="secure-particles" id="secureParticles"></div>
+    </div>
+
+    <!-- Login Container -->
+    <div class="secure-container">
+        <div class="secure-card">
+            <div class="secure-header">
+                <div class="secure-logo">
+                    <div class="logo-shield">🔐</div>
+                    <h1>SISTEMA ADMINISTRATIVO</h1>
+                    <p>Portal de Gestión Avanzada</p>
+                </div>
+            </div>
+
+            <form class="secure-form" id="secureLoginForm">
+                <div class="form-group">
+                    <div class="input-secure">
+                        <input type="email" id="adminEmail" required autocomplete="username">
+                        <label for="adminEmail">📧 Email Autorizado</label>
+                        <div class="input-border"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-secure">
+                        <input type="password" id="adminPassword" required autocomplete="current-password">
+                        <label for="adminPassword">🔑 Clave de Acceso</label>
+                        <div class="input-border"></div>
+                    </div>
+                </div>
+
+                <div class="security-options">
+                    <label class="security-check">
+                        <input type="checkbox" id="secureSession">
+                        <span class="checkmark-secure"></span>
+                        Mantener sesión segura
+                    </label>
+                    <div class="ip-display">
+                        IP: <span id="userIP">Verificando...</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="secure-btn">
+                    <span class="btn-text">🔓 Acceso Autorizado</span>
+                    <div class="security-loader"></div>
+                </button>
+
+                <div class="access-status" id="accessStatus"></div>
+            </form>
+
+            <div class="security-footer">
+                <p>🛡️ Sistema protegido con encriptación avanzada</p>
+                <div class="security-info">
+                    <span class="security-badge">SSL</span>
+                    <span class="security-badge">2FA</span>
+                    <span class="security-badge">LOG</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sistema de alertas de seguridad -->
+        <div class="security-alerts">
+            <div class="alert-item">
+                <div class="alert-icon">✅</div>
+                <div class="alert-text">
+                    <div class="alert-title">Conexión Segura</div>
+                    <div class="alert-desc">Certificado SSL activo</div>
+                </div>
+            </div>
+            <div class="alert-item">
+                <div class="alert-icon">🔒</div>
+                <div class="alert-text">
+                    <div class="alert-title">Acceso Restringido</div>
+                    <div class="alert-desc">Solo personal autorizado</div>
+                </div>
+            </div>
+            <div class="alert-item">
+                <div class="alert-icon">📊</div>
+                <div class="alert-text">
+                    <div class="alert-title">Monitoreo Activo</div>
+                    <div class="alert-desc">Logs de seguridad habilitados</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enlace de regreso oculto -->
+    <div class="return-link">
+        <a href="../index.html" class="return-btn">← Sitio Principal</a>
+    </div>
+
+    <script src="secure.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSecureLogin();
+            createSecurityParticles();
+            displayUserIP();
+        });
+
+        // Verificar si ya está autenticado
+        if (localStorage.getItem('secureAdminAuth') === 'authenticated') {
+            window.location.href = 'control.html';
+        }
+
+        // Mostrar IP del usuario
+        function displayUserIP() {
+            // Simulación de IP (en producción usarías una API real)
+            document.getElementById('userIP').textContent = '192.168.1.' + Math.floor(Math.random() * 255);
+        }
+
+        // Prevenir inspección de código (básico)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevenir click derecho
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+    </script>
+</body>
+</html>
