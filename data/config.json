@@ -1,0 +1,42 @@
+{
+  "site": {
+    "name": "PocketMine Maps And Plugins",
+    "description": "Plugins premium y mapas personalizados para servidores Minecraft Bedrock",
+    "version": "1.0.0",
+    "author": "Brayan Hernández",
+    "contact": {
+      "email": "brayanhernandez385@gmail.com",
+      "discord": "https://discord.gg/tu-servidor"
+    }
+  },
+  "admin": {
+    "panelPath": "management-portal-bh385",
+    "sessionTimeout": 1440,
+    "maxLoginAttempts": 3,
+    "lockoutTime": 15,
+    "autoSaveInterval": 2
+  },
+  "security": {
+    "enableLogging": true,
+    "maxLogs": 1000,
+    "enableInactivityTimeout": true,
+    "inactivityTime": 30
+  },
+  "features": {
+    "userRegistration": true,
+    "paymentProcessing": true,
+    "themeCustomization": true,
+    "analytics": true
+  },
+  "payment": {
+    "paypalEnabled": true,
+    "paypalMeUrl": "https://paypal.me/tuusuario",
+    "currency": "USD",
+    "taxRate": 0
+  },
+  "compatibility": {
+    "pocketmine": "5.0.0+",
+    "php": "8.0+",
+    "mcbe": "Todas las versiones"
+  }
+}
