@@ -1,11 +1,11 @@
 {
   "site": {
     "name": "PocketMine Maps And Plugins",
-    "description": "Plugins premium y mapas personalizados para servidores Minecraft Bedrock",
+    "description": "Plugins premium y mapas personalizados para servidores MinecraftPe Bedrock",
     "version": "1.0.0",
-    "author": "Brayan Hernández",
+    "author": "AssassinGhost",
     "contact": {
-      "email": "brayanhernandez385@gmail.com",
+      "email": "assassinghost0@gmail.com",
       "discord": "https://discord.gg/tu-servidor"
     }
   },
