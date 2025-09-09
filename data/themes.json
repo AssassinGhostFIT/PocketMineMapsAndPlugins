@@ -1,0 +1,94 @@
+{
+  "themes": {
+    "cosmic": {
+      "name": "Cósmico",
+      "description": "Tema futurista por defecto con efectos espaciales",
+      "colors": {
+        "primary": "#4ecdc4",
+        "secondary": "#ff6b6b",
+        "accent": "#45b7d1",
+        "background": "#0a0a0a",
+        "backgroundSecondary": "#1a1a2e",
+        "text": "#ffffff",
+        "textSecondary": "rgba(255, 255, 255, 0.7)"
+      },
+      "effects": {
+        "particles": true,
+        "gradients": true,
+        "animations": "full"
+      }
+    },
+    "halloween": {
+      "name": "Halloween",
+      "description": "Tema tenebroso con colores naranjas y negros",
+      "colors": {
+        "primary": "#ff6600",
+        "secondary": "#ff9500",
+        "accent": "#cc4400",
+        "background": "#1a0a00",
+        "backgroundSecondary": "#2d1a00",
+        "text": "#ffffff",
+        "textSecondary": "rgba(255, 255, 255, 0.8)"
+      },
+      "effects": {
+        "particles": true,
+        "gradients": true,
+        "animations": "spooky"
+      }
+    },
+    "christmas": {
+      "name": "Navidad",
+      "description": "Tema festivo con colores rojos, verdes y dorados",
+      "colors": {
+        "primary": "#c41e3a",
+        "secondary": "#2e8b57",
+        "accent": "#ffd700",
+        "background": "#0f1a0f",
+        "backgroundSecondary": "#1a2e1a",
+        "text": "#ffffff",
+        "textSecondary": "rgba(255, 255, 255, 0.8)"
+      },
+      "effects": {
+        "particles": true,
+        "gradients": true,
+        "animations": "festive"
+      }
+    },
+    "summer": {
+      "name": "Verano",
+      "description": "Tema tropical con colores azules, amarillos y corales",
+      "colors": {
+        "primary": "#00bfff",
+        "secondary": "#ffd700",
+        "accent": "#ff6347",
+        "background": "#001122",
+        "backgroundSecondary": "#002244",
+        "text": "#ffffff",
+        "textSecondary": "rgba(255, 255, 255, 0.8)"
+      },
+      "effects": {
+        "particles": true,
+        "gradients": true,
+        "animations": "tropical"
+      }
+    }
+  },
+  "current": "cosmic",
+  "customizable": {
+    "colors": true,
+    "effects": false,
+    "animations": false
+  },
+  "schedule": {
+    "halloween": {
+      "startDate": "2024-10-01",
+      "endDate": "2024-11-01",
+      "autoApply": false
+    },
+    "christmas": {
+      "startDate": "2024-12-01",
+      "endDate": "2025-01-07",
+      "autoApply": false
+    }
+  }
+}
