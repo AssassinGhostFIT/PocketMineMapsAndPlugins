@@ -1,5 +1,5 @@
 /* ==========================================
-   RESET Y CONFIGURACIÓN BASE
+    RESET Y CONFIGURACIÓN BASE
 ========================================== */
 * {
     margin: 0;
@@ -21,7 +21,7 @@ html {
 }
 
 /* ==========================================
-   FONDO CÓSMICO Y EFECTOS
+    FONDO CÓSMICO Y EFECTOS
 ========================================== */
 .cosmic-bg {
     position: fixed;
@@ -84,7 +84,7 @@ html {
 }
 
 /* ==========================================
-   HEADER Y NAVEGACIÓN
+    HEADER Y NAVEGACIÓN
 ========================================== */
 .header {
     position: fixed;
@@ -177,7 +177,7 @@ html {
 }
 
 /* ==========================================
-   HERO SECTION
+    HERO SECTION
 ========================================== */
 .hero {
     height: 100vh;
@@ -282,7 +282,7 @@ html {
 }
 
 /* ==========================================
-   FEATURES SECTION
+    FEATURES SECTION
 ========================================== */
 .features {
     padding: 100px 5%;
@@ -345,7 +345,7 @@ html {
 }
 
 /* ==========================================
-   CONTACT SECTION
+    CONTACT SECTION
 ========================================== */
 .contact {
     padding: 100px 5%;
@@ -405,7 +405,7 @@ html {
 }
 
 /* ==========================================
-   FOOTER
+    FOOTER
 ========================================== */
 .footer {
     background: rgba(0, 0, 0, 0.9);
@@ -481,7 +481,7 @@ html {
 }
 
 /* ==========================================
-   PARTÍCULAS FLOTANTES
+    PARTÍCULAS FLOTANTES
 ========================================== */
 .particle {
     position: absolute;
@@ -493,7 +493,7 @@ html {
 }
 
 /* ==========================================
-   RESPONSIVE DESIGN
+    RESPONSIVE DESIGN
 ========================================== */
 @media (max-width: 768px) {
     .nav-links {
@@ -570,7 +570,7 @@ html {
 }
 
 /* ==========================================
-   ANIMACIONES
+    ANIMACIONES
 ========================================== */
 @keyframes cosmicShift {
     0% { background: linear-gradient(45deg, #0f0f23, #1a0033, #000814); }
@@ -610,4 +610,118 @@ html {
     10% { opacity: 1; }
     90% { opacity: 1; }
     100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
+
+/* ==========================================
+    NUEVOS ESTILOS PARA FORMULARIOS DE AUTENTICACIÓN
+========================================== */
+.auth-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5%;
+    position: relative;
+    z-index: 10;
+}
+
+.auth-box {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(78, 205, 196, 0.3);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: 0 0 40px rgba(78, 205, 196, 0.2);
+    animation: slideUp 0.8s ease-out;
+}
+
+.auth-box h2 {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    margin-bottom: 1.5rem;
+    color: #4ecdc4;
+    text-shadow: 0 0 10px #4ecdc4;
+    font-weight: bold;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid rgba(78, 205, 196, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    border-radius: 50px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4ecdc4;
+    box-shadow: 0 0 15px rgba(78, 205, 196, 0.5);
+}
+
+.auth-btn {
+    margin-top: 1rem;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.auth-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(255, 107, 107, 0.3);
+}
+
+.auth-switch {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.auth-switch a {
+    color: #4ecdc4;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+    color: #45b7d1;
+}
+
+/* Ajuste para que las páginas de autenticación también muestren el fondo */
+body.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
